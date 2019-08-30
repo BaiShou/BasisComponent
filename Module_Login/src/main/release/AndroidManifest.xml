@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.arnold.mvvmcomponent.login">
+
+    <application>
+        <activity android:name=".MainActivity"/>
+
+        <meta-data android:name="com.arnold.mvvmcomponent.login.app.GlobalConfiguration"
+                android:value="ConfigModule"/>
+    </application>
+
+</manifest>

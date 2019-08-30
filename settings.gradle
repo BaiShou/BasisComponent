@@ -1,0 +1,1 @@
+include ':app', ':CommonArchitecture', ':CommonSdk', ':CommonBase', ':CommonView', ':Module_Login', ':CommonMvvm'
