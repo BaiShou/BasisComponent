@@ -1,4 +1,6 @@
 ext {
+    isMultiApp = isBuildModule.toBoolean()
+
     hosts = [
             api_host_release: "",
             api_host_debug  : "http://"

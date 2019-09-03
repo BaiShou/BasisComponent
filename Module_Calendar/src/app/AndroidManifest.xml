@@ -10,7 +10,7 @@
             android:supportsRtl="true"
             android:name="com.arnold.common.architecture.base.BaseApplication"
             android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".CalendarMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -20,6 +20,9 @@
 
         <meta-data android:name="com.arnold.mvvmcomponent.login.app.GlobalConfiguration"
                 android:value="ConfigModule"/>
+        <meta-data
+                android:name="com.arnold.mvvmcomponent.login.app.GlobalConfigurationTwo"
+                android:value="ConfigModule" />
 
         <meta-data android:name="com.arnold.common.sdk.core.GlobalConfiguration"
                 android:value="ConfigModule"/>

@@ -3,7 +3,7 @@
           package="com.arnold.mvvmcomponent.login">
 
     <application>
-        <activity android:name=".MainActivity"/>
+        <activity android:name="com.arnold.mvvmcomponent.login.CalendarMainActivity"/>
 
         <meta-data android:name="com.arnold.mvvmcomponent.login.app.GlobalConfiguration"
                 android:value="ConfigModule"/>

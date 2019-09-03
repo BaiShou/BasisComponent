@@ -1,4 +1,4 @@
-if (isBuildModule.toBoolean()) {
+if ( isBuildModule.toBoolean()) {
     apply plugin: 'com.android.application'
 } else {
     apply plugin: 'com.android.library'
@@ -66,12 +66,12 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
-            if (isBuildModule.toBoolean()) {
-                manifest.srcFile 'src/debug/AndroidManifest.xml'
-                java.srcDirs += 'src/debug/java'
-                res.srcDirs += 'src/debug/res'
+            if ( isBuildModule.toBoolean()) {
+                manifest.srcFile 'src/app/AndroidManifest.xml'
+                java.srcDirs += 'src/app/java'
+                res.srcDirs += 'src/app/res'
             } else {
-                manifest.srcFile 'src/release/AndroidManifest.xml'
+                manifest.srcFile 'src/library/AndroidManifest.xml'
             }
         }
     }
