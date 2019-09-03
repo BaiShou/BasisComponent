@@ -2,14 +2,14 @@ package com.arnold.common.sdk.debug
 
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import com.arnold.common.architecture.di.component.AppComponent
 import com.arnold.common.mvvm.BaseMvvmActivity
 import com.arnold.common.repository.utils.DataHelper
+import com.arnold.common.sdk.R
 import com.arnold.common.sdk.core.GlobalHttpHandlerImpl
 import com.arnold.common.sdk.debug.di.component.DaggerDebugActivityComponent
 import com.arnold.common.sdk.debug.model.DebugViewModel
-import com.arnold.mvvmcomponent.login.R
+import kotlinx.android.synthetic.main.activity_debug.*
 
 class DebugActivity : BaseMvvmActivity<DebugViewModel>() {
 
@@ -24,7 +24,7 @@ class DebugActivity : BaseMvvmActivity<DebugViewModel>() {
     }
 
     override fun initView(savedInstanceState: Bundle?) {
-        findViewById<TextView>(R.id.debug_tv_host).text = DataHelper.decodeString(GlobalHttpHandlerImpl.BASE_URL_KEY)
+        debug_tv_host.text = DataHelper.decodeString(GlobalHttpHandlerImpl.BASE_URL_KEY)
     }
 
     fun login(view: View) {

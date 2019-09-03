@@ -39,6 +39,16 @@ android {
         sourceCompatibility 1.8
         targetCompatibility 1.8
     }
+
+    sourceSets {
+        main {
+            if (isBuildModule.toBoolean()) {
+                manifest.srcFile 'src/app/AndroidManifest.xml'
+                java.srcDirs += 'src/app/java'
+                res.srcDirs += 'src/app/res'
+            }
+        }
+    }
 }
 
 dependencies {
