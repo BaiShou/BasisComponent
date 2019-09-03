@@ -1,4 +1,12 @@
 package com.arnold.common.mvvm
 
-interface BaseModel {
+import com.arnold.common.architecture.http.service.IApi
+
+
+open class BaseModel<T : IApi> (var mApi: T) : IModel {
+
+    override fun onDestroy() {
+
+    }
+
 }

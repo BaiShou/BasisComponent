@@ -2,7 +2,6 @@ package com.arnold.common.architecture.base.delegate
 
 import android.app.Application
 import android.content.Context
-import com.alibaba.android.arouter.launcher.ARouter
 import com.arnold.common.architecture.base.App
 import com.arnold.common.architecture.di.component.AppComponent
 import com.arnold.common.architecture.di.component.DaggerAppComponent
@@ -10,8 +9,8 @@ import com.arnold.common.architecture.di.module.GlobalConfigModule
 import com.arnold.common.architecture.integration.ConfigModule
 import com.arnold.common.architecture.integration.ManifestParser
 import com.arnold.common.architecture.integration.cache.IntelligentCache
-import com.arnold.common.architecture.utils.LogUtil
 import com.arnold.common.architecture.utils.Preconditions
+import com.tencent.mmkv.MMKV
 import java.util.ArrayList
 import javax.inject.Inject
 import javax.inject.Named
@@ -24,7 +23,7 @@ class AppDelegate(context: Context) : AppLifecycles, App {
     private var mApplication: Application? = null
     private var mAppComponent: AppComponent? = null
 
-    private var mModules: List<ConfigModule> = ManifestParser(context).parse()
+    private var mModules: MutableList<ConfigModule> = ManifestParser(context).parse()
 
     @Inject
     @field:Named("ActivityLifecycle")
@@ -59,18 +58,19 @@ class AppDelegate(context: Context) : AppLifecycles, App {
 
     override fun onCreate(application: Application) {
         this.mApplication = application
+        MMKV.initialize(application)
         mAppComponent = DaggerAppComponent
             .builder()
             .application(application)
             .globalConfigModule(getGlobalConfigModule(application, mModules))
             .build()
         mAppComponent?.inject(this)
+
         mAppComponent?.let {
             it.extras().put(IntelligentCache.getKeyOfKeep(ConfigModule::class.java.name), mModules)
         }
 
-        ARouter.init(application)
-        LogUtil.init(true)
+
 
         //注册框架内部已实现的 Activity 生命周期逻辑
         application.registerActivityLifecycleCallbacks(mActivityLifecycle)
@@ -134,9 +134,13 @@ class AppDelegate(context: Context) : AppLifecycles, App {
      */
     private fun getGlobalConfigModule(
         context: Context,
-        modules: List<ConfigModule>
+        modules: MutableList<ConfigModule>
     ): GlobalConfigModule {
         val builder = GlobalConfigModule.Builder()
+
+        modules.sortByDescending {
+            it.mLoadWeight
+        }
         //遍历 ConfigModule 集合, 给全局配置 GlobalConfigModule 添加参数
         for (module in modules) {
             module.applyOptions(context, builder)

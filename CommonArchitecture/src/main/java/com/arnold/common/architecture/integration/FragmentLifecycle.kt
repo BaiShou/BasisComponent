@@ -108,7 +108,7 @@ constructor() : FragmentManager.FragmentLifecycleCallbacks() {
     private fun fetchFragmentDelegate(fragment: Fragment): FragmentDelegate? {
         if (fragment is IFragment) {
             val cache = getCacheFromFragment(fragment as IFragment)
-            return cache.get(IntelligentCache.getKeyOfKeep(FragmentDelegate.FRAGMENT_DELEGATE)) as FragmentDelegate
+            return cache.get(IntelligentCache.getKeyOfKeep(FragmentDelegate.FRAGMENT_DELEGATE)) as FragmentDelegate?
         }
         return null
     }

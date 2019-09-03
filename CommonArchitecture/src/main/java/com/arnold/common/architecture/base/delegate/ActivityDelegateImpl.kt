@@ -2,11 +2,9 @@ package com.arnold.common.architecture.base.delegate
 
 import android.app.Activity
 import android.os.Bundle
-import com.alibaba.android.arouter.launcher.ARouter
 import com.arnold.common.architecture.base.IActivity
 import com.arnold.common.architecture.integration.EventBusManager
-import com.arnold.common.architecture.utils.ArnoldUtils
-import dagger.android.AndroidInjection
+import com.arnold.common.architecture.utils.obtainAppComponentFromContext
 
 /**
  * [ActivityDelegate] 默认实现类
@@ -25,11 +23,8 @@ class ActivityDelegateImpl constructor(private var mActivity: Activity?) : Activ
                 EventBusManager.getInstance().register(mActivity!!)
             }
 
-            if (it.enableARouterInject()) {
-                ARouter.getInstance().inject(this)
-            }
 
-            it.setupActivityComponent(ArnoldUtils.obtainAppComponentFromContext(mActivity!!))
+            it.setupActivityComponent(mActivity!!.obtainAppComponentFromContext())
         }
     }
 

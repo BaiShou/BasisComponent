@@ -1,24 +1,37 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+if (isBuildModule.toBoolean()) {
+    apply plugin: 'kotlin-kapt'
+}
+apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.0"
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
 
     defaultConfig {
-        minSdkVersion 17
-        targetSdkVersion 29
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        buildConfigField("String", "api_host", "\"${rootProject.ext.api.api_host}\"")
     }
 
     buildTypes {
-        release {
+        debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "boolean", "USE_CANARY", "true"
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "boolean", "USE_CANARY", "false"
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -29,11 +42,13 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    api project(path: ':CommonArchitecture')
+    implementation rootProject.ext.dependencies["kotlin_stdlib"]
+    implementation rootProject.ext.dependencies["appcompat"]
+    api project(path: ':CommonMvvm')
+    api project(path: ':CommonView')
+    if (isBuildModule.toBoolean()) {
+        kapt rootProject.ext.dependencies["dagger2-compiler"]
+    }
+    api rootProject.ext.dependencies["dagger2"]
+    api rootProject.ext.dependencies["arouter"]
 }

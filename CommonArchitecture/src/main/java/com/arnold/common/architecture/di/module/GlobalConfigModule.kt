@@ -2,25 +2,24 @@ package com.arnold.common.architecture.di.module
 
 import android.app.Application
 import android.text.TextUtils
-import androidx.annotation.NonNull
 import com.arnold.common.architecture.http.BaseUrl
-import com.arnold.common.architecture.http.GlobalHttpHandler
 import com.arnold.common.architecture.integration.ConfigModule
 import com.arnold.common.architecture.integration.cache.Cache
 import com.arnold.common.architecture.integration.cache.CacheType
 import com.arnold.common.architecture.integration.cache.IntelligentCache
 import com.arnold.common.architecture.integration.cache.LruCache
-import com.arnold.common.architecture.utils.DataHelper
 import com.arnold.common.architecture.utils.Preconditions
+import com.arnold.common.network.di.module.ClientModule
+import com.arnold.common.network.http.GlobalHttpHandler
+import com.arnold.common.repository.di.module.RepositoryModule
 import dagger.Module
 import dagger.Provides
 import okhttp3.HttpUrl
+import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.Interceptor
-import okhttp3.internal.Util
+import okhttp3.internal.threadFactory
 import java.io.File
-import java.util.ArrayList
 import java.util.concurrent.*
-import javax.inject.Named
 import javax.inject.Singleton
 
 /**
@@ -32,11 +31,11 @@ class GlobalConfigModule private constructor(builder: Builder) {
     private val mApiUrl: HttpUrl?
     private val mBaseUrl: BaseUrl?
     private val mHandler: GlobalHttpHandler?
-    private val mInterceptors: MutableList<Interceptor>?
+    private val mInterceptors: MutableList<Interceptor>
     private val mCacheFile: File?
     private val mRetrofitConfiguration: ClientModule.RetrofitConfiguration?
     private val mOkhttpConfiguration: ClientModule.OkhttpConfiguration?
-    private val mRxCacheConfiguration: ClientModule.RxCacheConfiguration?
+    private val mRxCacheConfiguration: RepositoryModule.RxCacheConfiguration?
     private val mGsonConfiguration: AppModule.GsonConfiguration?
     private val mCacheFactory: Cache.Factory<String, Any>?
     private val mExecutorService: ExecutorService?
@@ -72,14 +71,14 @@ class GlobalConfigModule private constructor(builder: Builder) {
             return it.url()
         }
 
-        val parse = HttpUrl.parse("https://api.github.com/")
+        val parse = "https://api.github.com/".toHttpUrlOrNull()
         return mApiUrl ?: parse
     }
 
 
     @Singleton
     @Provides
-    internal fun provideInterceptors(): MutableList<Interceptor>? {
+    internal fun provideInterceptors(): MutableList<Interceptor> {
         return mInterceptors
     }
 
@@ -106,7 +105,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
     @Singleton
     @Provides
     internal fun provideCacheFile(application: Application): File {
-        return mCacheFile ?: DataHelper.getCacheFile(application)
+        return mCacheFile ?: com.arnold.common.repository.utils.DataHelper.getCacheFile(application)
     }
 
     @Singleton
@@ -124,7 +123,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
 
     @Singleton
     @Provides
-    internal fun provideRxCacheConfiguration(): ClientModule.RxCacheConfiguration? {
+    internal fun provideRxCacheConfiguration(): RepositoryModule.RxCacheConfiguration? {
         return mRxCacheConfiguration
     }
 
@@ -166,7 +165,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
     internal fun provideExecutorService(): ExecutorService {
         return mExecutorService ?: ThreadPoolExecutor(
             0, Integer.MAX_VALUE, 60, TimeUnit.SECONDS,
-            SynchronousQueue(), Util.threadFactory("arnold Executor", false)
+            SynchronousQueue(), threadFactory("arnold Executor", false)
         )
     }
 
@@ -174,12 +173,12 @@ class GlobalConfigModule private constructor(builder: Builder) {
         var apiUrl: HttpUrl? = null
         var baseUrl: BaseUrl? = null
         var handler: GlobalHttpHandler? = null
-        var interceptors: MutableList<Interceptor>? = null
+        var interceptors: MutableList<Interceptor> = mutableListOf()
         var modules: MutableList<ConfigModule> = mutableListOf()
         var cacheFile: File? = null
         var retrofitConfiguration: ClientModule.RetrofitConfiguration? = null
         var okhttpConfiguration: ClientModule.OkhttpConfiguration? = null
-        var rxCacheConfiguration: ClientModule.RxCacheConfiguration? = null
+        var rxCacheConfiguration: RepositoryModule.RxCacheConfiguration? = null
         var gsonConfiguration: AppModule.GsonConfiguration? = null
 
         var cacheFactory: Cache.Factory<String, Any>? = null
@@ -189,7 +188,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
             if (TextUtils.isEmpty(baseUrl)) {
                 throw NullPointerException("BaseUrl can not be empty")
             }
-            this.apiUrl = HttpUrl.parse(baseUrl)
+            this.apiUrl = baseUrl.toHttpUrlOrNull()
             return this
         }
 
@@ -212,10 +211,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
         }
 
         fun addInterceptor(interceptor: Interceptor): Builder {//动态添加任意个interceptor
-            if (interceptors == null) {
-                interceptors = mutableListOf()
-            }
-            this.interceptors!!.add(interceptor)
+            this.interceptors.add(interceptor)
             return this
         }
 
@@ -234,7 +230,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
             return this
         }
 
-        fun rxCacheConfiguration(rxCacheConfiguration: ClientModule.RxCacheConfiguration): Builder {
+        fun rxCacheConfiguration(rxCacheConfiguration: RepositoryModule.RxCacheConfiguration): Builder {
             this.rxCacheConfiguration = rxCacheConfiguration
             return this
         }

@@ -5,11 +5,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.alibaba.android.arouter.launcher.ARouter
 import com.arnold.common.architecture.base.IFragment
 import com.arnold.common.architecture.integration.EventBusManager
-import com.arnold.common.architecture.utils.ArnoldUtils
-import dagger.android.support.AndroidSupportInjection
+import com.arnold.common.architecture.utils.obtainAppComponentFromContext
 
 /**
  * [FragmentDelegate] 默认实现类
@@ -24,7 +22,7 @@ constructor(
 
     override fun onAttach(context: Context) {
         iFragment?.let {
-//            if (it.enableInject()) {
+            //            if (it.enableInject()) {
 //                //dagger自动注入
 //                AndroidSupportInjection.inject(mFragment)
 //            }
@@ -37,9 +35,10 @@ constructor(
             if (it.useEventBus()) {
                 EventBusManager.getInstance().register(mFragment!!)
             }
+
             val activity = mFragment!!.activity
             activity?.let { context ->
-                it.setupFragmentComponent(ArnoldUtils.obtainAppComponentFromContext(context))
+                it.setupFragmentComponent(context.obtainAppComponentFromContext())
             }
         }
 

@@ -9,20 +9,12 @@ import com.arnold.common.architecture.di.module.GlobalConfigModule
 import com.arnold.common.architecture.integration.ConfigModule
 import com.arnold.common.architecture.integration.ManifestParser
 import com.arnold.common.architecture.utils.Preconditions
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
 /**
  * 所有独立的modu都使用此类
  */
-class BaseApplication : Application(), App, HasAndroidInjector {
-
-    @Inject
-    lateinit var dispatchingActivityInjector: DispatchingAndroidInjector<Any>
-
-    override fun androidInjector(): AndroidInjector<Any> = dispatchingActivityInjector
+class BaseApplication : Application(), App {
 
     private val mModules: MutableList<ConfigModule> by lazy { ManifestParser(this).parse() }
 

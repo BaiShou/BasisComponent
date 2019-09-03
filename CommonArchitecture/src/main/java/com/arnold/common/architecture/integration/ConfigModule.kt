@@ -8,6 +8,12 @@ import com.arnold.common.architecture.base.delegate.AppLifecycles
 import com.arnold.common.architecture.di.module.GlobalConfigModule
 
 interface ConfigModule {
+
+    /**
+     * 加载权重，控制不同配置文件加载顺序
+     */
+    var mLoadWeight: Int
+
     /**
      * 使用 [GlobalConfigModule.Builder] 给框架配置一些配置参数
      *
@@ -23,6 +29,11 @@ interface ConfigModule {
      * @param lifecycles [Application] 的生命周期容器, 可向框架中添加多个 [Application] 的生命周期类
      */
     abstract fun injectAppLifecycle(context: Context, lifecycles: MutableList<AppLifecycles>)
+
+    /**
+     * 实例化component
+     */
+//     fun injectComponent(component: IComponent){}
 
     /**
      * 使用 [Application.ActivityLifecycleCallbacks] 在 [Activity] 的生命周期中注入一些操作

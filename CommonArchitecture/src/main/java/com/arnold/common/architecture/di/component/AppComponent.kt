@@ -3,14 +3,14 @@ package com.arnold.common.architecture.di.component
 import android.app.Application
 import com.arnold.common.architecture.base.delegate.AppDelegate
 import com.arnold.common.architecture.di.module.AppModule
-import com.arnold.common.architecture.di.module.ClientModule
 import com.arnold.common.architecture.di.module.GlobalConfigModule
+import com.arnold.common.architecture.integration.IRepositoryManager
 import com.arnold.common.architecture.integration.cache.Cache
+import com.arnold.common.network.di.module.ClientModule
+import com.arnold.common.repository.di.module.RepositoryModule
 import com.google.gson.Gson
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.AndroidInjectionModule
-import dagger.android.support.AndroidSupportInjectionModule
 import okhttp3.OkHttpClient
 import java.io.File
 import javax.inject.Singleton
@@ -20,8 +20,7 @@ import javax.inject.Singleton
     modules = [AppModule::class,
         ClientModule::class,
         GlobalConfigModule::class,
-        AndroidInjectionModule::class,
-        AndroidSupportInjectionModule::class]
+        RepositoryModule::class]
 )
 interface AppComponent {
 
@@ -34,6 +33,7 @@ interface AppComponent {
      */
     fun okHttpClient(): OkHttpClient
 
+    fun repositoryManager(): IRepositoryManager
 
     /**
      * Json 序列化库
@@ -64,6 +64,7 @@ interface AppComponent {
      * @return [Cache.Factory]
      */
     fun cacheFactory(): Cache.Factory<String, Any>
+
 
     fun inject(appDelegate: AppDelegate)
 

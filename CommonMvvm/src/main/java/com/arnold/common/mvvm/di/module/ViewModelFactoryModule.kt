@@ -6,12 +6,10 @@ import com.arnold.common.mvvm.ViewModelFactory
 import dagger.Binds
 import dagger.Module
 
-
 @Module
 abstract class ViewModelFactoryModule {
 
     @Binds
-    @ActivityScope
     internal abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
 }

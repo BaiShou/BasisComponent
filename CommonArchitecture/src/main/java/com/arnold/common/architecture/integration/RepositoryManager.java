@@ -18,9 +18,6 @@ package com.arnold.common.architecture.integration;
 import android.app.Application;
 import android.content.Context;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.arnold.common.architecture.integration.cache.Cache;
 import com.arnold.common.architecture.integration.cache.CacheType;
 import com.arnold.common.architecture.utils.Preconditions;
@@ -40,7 +37,6 @@ import io.rx_cache2.internal.RxCache;
 import okhttp3.Interceptor;
 import retrofit2.Retrofit;
 
-
 @Singleton
 public class RepositoryManager implements IRepositoryManager {
 
@@ -51,7 +47,7 @@ public class RepositoryManager implements IRepositoryManager {
     @Inject
     Application mApplication;
     @Inject
-    Cache.Factory mCachefactory;
+    Cache.Factory<String, Object> mCachefactory;
     @Inject
     List<Interceptor> interceptors;
     private Cache<String, Object> mRetrofitServiceCache;
@@ -65,12 +61,12 @@ public class RepositoryManager implements IRepositoryManager {
      * 根据传入的 Class 获取对应的 Retrofit service
      *
      * @param serviceClass ApiService class
-     * @param <T> ApiService class
+     * @param <T>          ApiService class
      * @return ApiService
      */
-    @NonNull
+
     @Override
-    public synchronized <T> T obtainRetrofitService(@NonNull Class<T> serviceClass) {
+    public synchronized <T> T obtainRetrofitService(Class<T> serviceClass) {
         return createWrapperService(serviceClass);
     }
 
@@ -78,7 +74,7 @@ public class RepositoryManager implements IRepositoryManager {
      * 根据 https://zhuanlan.zhihu.com/p/40097338 对 Retrofit 进行的优化
      *
      * @param serviceClass ApiService class
-     * @param <T> ApiService class
+     * @param <T>          ApiService class
      * @return ApiService
      */
     private <T> T createWrapperService(Class<T> serviceClass) {
@@ -88,7 +84,7 @@ public class RepositoryManager implements IRepositoryManager {
         return (T) Proxy.newProxyInstance(serviceClass.getClassLoader(),
                 new Class<?>[]{serviceClass}, new InvocationHandler() {
                     @Override
-                    public Object invoke(Object proxy, Method method, @Nullable Object[] args)
+                    public Object invoke(Object proxy, Method method, Object[] args)
                             throws Throwable {
                         // 此处在调用 serviceClass 中的方法时触发
 
@@ -123,7 +119,7 @@ public class RepositoryManager implements IRepositoryManager {
      * 根据传入的 Class 获取对应的 Retrofit service
      *
      * @param serviceClass ApiService class
-     * @param <T> ApiService class
+     * @param <T>          ApiService class
      * @return ApiService
      */
     private <T> T getRetrofitService(Class<T> serviceClass) {
@@ -148,12 +144,11 @@ public class RepositoryManager implements IRepositoryManager {
      * 根据传入的 Class 获取对应的 RxCache service
      *
      * @param cacheClass Cache class
-     * @param <T> Cache class
+     * @param <T>        Cache class
      * @return Cache
      */
-    @NonNull
     @Override
-    public synchronized <T> T obtainCacheService(@NonNull Class<T> cacheClass) {
+    public synchronized <T> T obtainCacheService(Class<T> cacheClass) {
         Preconditions.checkNotNull(cacheClass, "cacheClass == null");
         if (mCacheServiceCache == null) {
             mCacheServiceCache = mCachefactory.build(CacheType.CACHE_SERVICE_CACHE);
@@ -176,7 +171,6 @@ public class RepositoryManager implements IRepositoryManager {
         mRxCache.get().evictAll().subscribe();
     }
 
-    @NonNull
     @Override
     public Context getContext() {
         return mApplication;
