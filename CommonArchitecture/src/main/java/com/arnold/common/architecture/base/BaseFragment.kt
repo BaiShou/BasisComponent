@@ -1,7 +1,5 @@
 package com.arnold.common.architecture.base
 
-import android.app.PendingIntent.getActivity
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +16,6 @@ import io.reactivex.subjects.Subject
 abstract class BaseFragment : Fragment(), IFragment, FragmentLifecycleable {
     private val mLifecycleSubject = BehaviorSubject.create<FragmentEvent>()
     private var mCache: Cache<String, Any>? = null
-    protected var mContext: Context? = null
 
     override fun provideLifecycleSubject(): Subject<FragmentEvent> = mLifecycleSubject
 
@@ -39,13 +36,4 @@ abstract class BaseFragment : Fragment(), IFragment, FragmentLifecycleable {
         return initView(inflater, container, savedInstanceState)
     }
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        mContext = context
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        mContext = null
-    }
 }
