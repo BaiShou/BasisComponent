@@ -13,7 +13,7 @@
 			<tr>
 				<td colspan="6">
 				APP<br>
-				这里可以进行模块划分，具体可以参考二号人事部的项目架构</td>
+				这里可以进行模块划分</td>
 			</tr>
 			<tr>
                 <td colspan="6">
@@ -50,77 +50,6 @@
 			</tr>
 		</table>
 
-## 2号人事部项目架构
-
-<table border="1" width="100%" style="text-align: center;">
-			<tr>
-				<td colspan="6">APP</td>
-			</tr>
-			<tr>
-				<td>
-				module_calendar
-				日历模块
-				</td>
-				<td>
-				module_employee
-				员工模块
-				</td>
-				<td>
-				module_user
-				用户模块
-				</td>
-				<td>
-				module_hr
-				人事模块
-				</td>
-				<td>
-				module_browser
-				web模块
-				</td>
-				<td>
-				module_login
-				登录模块
-				</td>
-			</tr>
-			<tr>
-				<td  colspan="4">
-				CommonSdk<br>
-				2号人事部项目公共库（与业务逻辑相关，主要包含一些组件化的封装），所有的第三方框架和自定义View框架都在这里添加依赖，以方便统一管理。<br>
-				是其他所有子组件必需依赖的库
-				</td>
-				<td colspan="2">
-				CommonBaseService<br>
-				公共服务，主要的作用是用于 业务层 各个模块之间的交互(自定义方法和类的调用), 包含自定义 Service 接口, 和可用于跨模块传递的自定义类z
-				</td>
-			</tr>
-			<tr>
-				<td  colspan="3">
-				CommonMvvm/CommonMvp<br>
-				MVVP或者MVP模式的库，一个项目只能选择一种库进行开发
-				</td>
-				<td  colspan="3">
-				CommonView<br>
-				通用的自定义View框架,一些APP特有的view效果可以抽出独立成一个库
-				</td>
-			</tr>
-			<tr>
-				<td colspan="3">
-				CommonArchitecture<br>
-				通用框架库。包含BaseApplication、常用的工具类以及架构层的封装</td>
-				<td colspan="3"></td>
-			</tr>
-			<tr>
-				<td colspan="2">
-				CommonNetwork<br>
-				网络库，目前是okhttp + retrfoit
-				</td>
-				<td colspan="1">
-				CommonRepository
-				数据管理库
-				</td>
-				<td colspan="3"/>
-			</tr>
-		</table>	
 		
 		
 ## 请求全局拦截处理
