@@ -1,12 +1,11 @@
 package com.arnold.common.mvvm
 
-import com.arnold.common.architecture.http.service.IApi
+import com.arnold.common.architecture.integration.IRepositoryManager
 
-
-open class BaseModel<T : IApi> (var mApi: T) : IModel {
+open class BaseModel(var mRepositoryManager: IRepositoryManager?) : IModel {
 
     override fun onDestroy() {
-
+        mRepositoryManager = null
     }
 
 }

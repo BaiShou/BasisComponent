@@ -11,7 +11,7 @@ import com.arnold.common.architecture.integration.IRepositoryManager
  * 修改时间：
  * 修改备注：
  */
-class BaseModel(private var mRepositoryManager: IRepositoryManager?) : IModel {
+class BaseModel(var mRepositoryManager: IRepositoryManager?) : IModel {
 
     override fun onDestroy() {
         mRepositoryManager = null

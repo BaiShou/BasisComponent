@@ -35,6 +35,7 @@ ext {
             arouterSdkVersion        : "1.5.0",
             aRouterCompilerSdkVersion: "1.2.2",
             okhttp3SdkVersion        : "4.1.0",
+            canarySdkVersion        : "2.0-beta-3",
     ]
 
     dependencies = [
@@ -92,6 +93,7 @@ ext {
             "gson"                     : "com.google.code.gson:gson:2.8.5",
             "eventbus"                 : "org.greenrobot:eventbus:3.1.1",
             "mmkv"                     : "com.tencent:mmkv:1.0.22",
+            "canary-debug"               : "com.squareup.leakcanary:leakcanary-android:${version.canarySdkVersion}",
 
     ]
 
