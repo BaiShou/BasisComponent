@@ -12,9 +12,7 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
     }
 
     buildTypes {
@@ -34,7 +32,8 @@ dependencies {
     implementation rootProject.ext.dependencies["dagger2"]
     implementation rootProject.ext.dependencies["kotlin_stdlib"]
     kapt rootProject.ext.dependencies["dagger2-compiler"]
-    implementation rootProject.ext.dependencies["appcompat"]
+    implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["support-v4"]
     api rootProject.ext.dependencies["gson"]
     api rootProject.ext.dependencies["logger"]
     api rootProject.ext.dependencies["okhttp3"]

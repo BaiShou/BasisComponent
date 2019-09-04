@@ -13,7 +13,7 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
     }
 
     buildTypes {
@@ -51,8 +51,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.dependencies["kotlin_stdlib"]
-    implementation rootProject.ext.dependencies["appcompat"]
-    implementation rootProject.ext.dependencies["core_ktx"]
+    implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["support-v4"]
+    implementation rootProject.ext.dependencies["annotations"]
     implementation rootProject.ext.dependencies["constraintlayout"]
     if (!isBuildModule.toBoolean()) {
         //在宿主 App 中使用 implementation 依赖业务组件, 业务组件的代码就会完全暴露给宿主 App, 不利于代码的隔离

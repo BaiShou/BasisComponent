@@ -1,11 +1,11 @@
 package com.arnold.common.mvvm
 
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.arnold.common.architecture.base.BaseFragment
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject

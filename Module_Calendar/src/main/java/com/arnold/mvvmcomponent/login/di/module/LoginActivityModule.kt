@@ -1,6 +1,6 @@
 package com.arnold.mvvmcomponent.login.di.module
 
-import androidx.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModel
 import com.arnold.common.architecture.integration.IRepositoryManager
 import com.arnold.common.mvvm.di.scope.ViewModelKey
 import com.arnold.mvvmcomponent.login.model.LoginApi

@@ -1,6 +1,6 @@
 package com.arnold.common.sdk.debug.di.module
 
-import androidx.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModel
 import com.arnold.common.architecture.integration.IRepositoryManager
 import com.arnold.common.mvvm.di.scope.ViewModelKey
 import com.arnold.common.sdk.debug.model.DebugViewModel
@@ -31,6 +31,6 @@ abstract class DebugActivityInternalModule {
     @Binds
     @IntoMap
     @ViewModelKey(DebugViewModel::class)
-    abstract fun provideDebugViewModel(loginViewModel: DebugViewModel): ViewModel
+    abstract fun provideDebugViewModel(debugViewModel: DebugViewModel): ViewModel
 
 }

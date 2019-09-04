@@ -1,7 +1,7 @@
 package com.arnold.common.mvvm.di.scope;
 
 
-import androidx.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModel;
 
 import dagger.MapKey;
 import kotlin.annotation.AnnotationTarget;

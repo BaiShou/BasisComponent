@@ -2,9 +2,9 @@ package com.arnold.common.architecture.integration
 
 import android.content.Context
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.view.View
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.arnold.common.architecture.base.IFragment
 import com.arnold.common.architecture.base.delegate.FragmentDelegate
 import com.arnold.common.architecture.base.delegate.FragmentDelegateImpl

@@ -1,7 +1,7 @@
 package com.arnold.mvvmcomponent.login.common.service
 
 import android.content.Context
-import androidx.fragment.app.Fragment
+import android.support.v4.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.arnold.common.sdk.core.RouterHub
 import com.arnold.common.service.calendar.service.ICalendarService

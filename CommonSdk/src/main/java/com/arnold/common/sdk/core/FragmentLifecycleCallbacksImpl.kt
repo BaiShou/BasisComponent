@@ -1,10 +1,10 @@
 package com.arnold.common.sdk.core
 
 import android.content.Context
-import androidx.fragment.app.FragmentManager
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.view.View
-import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.launcher.ARouter
 import com.arnold.common.architecture.base.IFragment
 import com.arnold.common.architecture.utils.LogUtil

@@ -2,7 +2,7 @@ package com.arnold.common.architecture.di.module
 
 import android.app.Application
 import android.content.Context
-import androidx.fragment.app.FragmentManager
+import android.support.v4.app.FragmentManager
 import com.arnold.common.architecture.integration.*
 import com.arnold.common.architecture.integration.cache.Cache
 import com.arnold.common.architecture.integration.cache.CacheType
@@ -51,7 +51,7 @@ class AppModule {
     @Singleton
     @Provides
     internal fun provideFragmentLifecycles(): List<FragmentManager.FragmentLifecycleCallbacks> {
-        return ArrayList<FragmentManager.FragmentLifecycleCallbacks>()
+        return ArrayList()
     }
 
     interface GsonConfiguration {

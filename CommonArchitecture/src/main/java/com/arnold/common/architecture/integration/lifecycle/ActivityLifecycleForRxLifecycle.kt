@@ -3,7 +3,7 @@ package com.arnold.common.architecture.integration.lifecycle
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import androidx.fragment.app.FragmentActivity
+import android.support.v4.app.FragmentActivity
 import com.trello.rxlifecycle2.android.ActivityEvent
 import dagger.Lazy
 import io.reactivex.subjects.Subject

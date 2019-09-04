@@ -1,6 +1,6 @@
 package com.arnold.common.service
 
-import androidx.fragment.app.Fragment
+import android.support.v4.app.Fragment
 import com.alibaba.android.arouter.facade.template.IProvider
 
 /**

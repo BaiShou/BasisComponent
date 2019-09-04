@@ -16,7 +16,7 @@
 package com.arnold.common.architecture.utils;
 
 
-import androidx.annotation.Nullable;
+import android.support.annotation.Nullable;
 
 /**
  * ================================================

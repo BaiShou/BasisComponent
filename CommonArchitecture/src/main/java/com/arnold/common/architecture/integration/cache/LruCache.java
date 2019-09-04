@@ -16,8 +16,8 @@
 package com.arnold.common.architecture.integration.cache;
 
 import android.app.Application;
+import android.support.annotation.Nullable;
 
-import androidx.annotation.Nullable;
 
 import com.arnold.common.architecture.di.module.GlobalConfigModule;
 

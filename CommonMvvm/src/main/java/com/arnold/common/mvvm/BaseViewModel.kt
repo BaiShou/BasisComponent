@@ -1,7 +1,7 @@
 package com.arnold.common.mvvm
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import android.arch.lifecycle.AndroidViewModel
 
 /**
  * 所有[AndroidViewModel]基类

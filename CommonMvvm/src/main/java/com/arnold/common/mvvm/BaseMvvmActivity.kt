@@ -1,8 +1,8 @@
 package com.arnold.common.mvvm
 
+import android.arch.lifecycle.ViewModelProvider
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.arnold.common.architecture.base.BaseActivity
 import java.lang.reflect.ParameterizedType
 import javax.inject.Inject

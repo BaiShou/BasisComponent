@@ -2,8 +2,8 @@ package com.arnold.common.sdk.core
 
 import android.app.Application
 import android.content.Context
+import android.support.v4.app.FragmentManager
 import android.text.TextUtils
-import androidx.fragment.app.FragmentManager
 import com.arnold.common.architecture.base.delegate.AppLifecycles
 import com.arnold.common.architecture.di.module.AppModule
 import com.arnold.common.architecture.di.module.GlobalConfigModule

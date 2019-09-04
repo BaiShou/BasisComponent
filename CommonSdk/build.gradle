@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
         buildConfigField("String", "api_host", "\"${rootProject.ext.api.api_host}\"")
     }
 
@@ -53,7 +53,8 @@ android {
 
 dependencies {
     implementation rootProject.ext.dependencies["kotlin_stdlib"]
-    implementation rootProject.ext.dependencies["appcompat"]
+    implementation rootProject.ext.dependencies["appcompat-v7"]
+    implementation rootProject.ext.dependencies["support-v4"]
     api project(path: ':CommonMvvm')
     api project(path: ':CommonView')
     if (isBuildModule.toBoolean()) {

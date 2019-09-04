@@ -16,8 +16,8 @@
 package com.arnold.common.architecture.integration;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
-import androidx.annotation.NonNull;
 
 /**
  * 用来管理网络请求层,以及数据缓存层

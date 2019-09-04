@@ -3,8 +3,8 @@ package com.arnold.common.architecture.integration
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
+import android.support.v4.app.FragmentActivity
+import android.support.v4.app.FragmentManager
 import com.arnold.common.architecture.base.IActivity
 import com.arnold.common.architecture.base.delegate.ActivityDelegate
 import com.arnold.common.architecture.base.delegate.ActivityDelegateImpl

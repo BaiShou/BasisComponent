@@ -13,7 +13,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
 
     }
 
@@ -32,6 +32,5 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation rootProject.ext.dependencies["kotlin_stdlib"]
 }
