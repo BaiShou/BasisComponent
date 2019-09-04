@@ -61,4 +61,5 @@ dependencies {
     }
     api rootProject.ext.dependencies["dagger2"]
     api rootProject.ext.dependencies["arouter"]
+    debugImplementation rootProject.ext.dependencies["canary-debug"]
 }

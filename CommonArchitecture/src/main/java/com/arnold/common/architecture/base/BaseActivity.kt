@@ -1,8 +1,9 @@
 package com.arnold.common.architecture.base
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.IntegerRes
 import androidx.appcompat.app.AppCompatActivity
 import com.arnold.common.architecture.integration.cache.Cache
 import com.arnold.common.architecture.integration.cache.CacheType
@@ -19,6 +20,9 @@ abstract class BaseActivity : AppCompatActivity(), IActivity,
     ActivityLifecycleable {
 
     private val mLifecycleSubject = BehaviorSubject.create<ActivityEvent>()
+
+    lateinit var context: Activity
+
     private val mCache: Cache<String, Any> by lazy {
         this.obtainAppComponentFromContext().cacheFactory()
             .build(CacheType.ACTIVITY_CACHE)
@@ -34,10 +38,8 @@ abstract class BaseActivity : AppCompatActivity(), IActivity,
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        if (enableARouterInject()) {
-//            ARouter.getInstance().inject(this)
-//        }
 
+        context = this
         val layout = layout()
 
         if (layout is View) {
