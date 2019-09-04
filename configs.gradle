@@ -30,7 +30,7 @@ ext {
             butterknifeSdkVersion    : "10.1.0",
             rxlifecycleSdkVersion    : "1.0",
             rxlifecycle2SdkVersion   : "2.2.2",
-            espressoSdkVersion       : "3.0.1",
+            espressoSdkVersion       : "3.2.0",
             canarySdkVersion         : "1.5.4",
             arouterSdkVersion        : "1.5.0",
             aRouterCompilerSdkVersion: "1.2.2",
@@ -88,11 +88,19 @@ ext {
             "dagger2-android-processor": "com.google.dagger:dagger-android-processor:${version["dagger2SdkVersion"]}",
             "arouter"                  : "com.alibaba:arouter-api:${version.arouterSdkVersion}",
             "arouter-compiler"         : "com.alibaba:arouter-compiler:${version.aRouterCompilerSdkVersion}",
-            "logger"                   : "com.orhanobut:logger:2.2.0",
             "gson"                     : "com.google.code.gson:gson:2.8.5",
             "eventbus"                 : "org.greenrobot:eventbus:3.1.1",
             "mmkv"                     : "com.tencent:mmkv:1.0.22",
-            "canary-debug"               : "com.squareup.leakcanary:leakcanary-android:${version.canarySdkVersion}",
+
+            //test
+            "junit"                    : "junit:junit:4.12",
+            "androidJUnitRunner"       : "android.support.test.runner.AndroidJUnitRunner",
+            "runner"                   : "androidx.test:runner:1.2.0",
+            "espresso-core"            : "androidx.test.espresso:espresso-core:${version["espressoSdkVersion"]}",
+            "espresso-contrib"         : "androidx.test.espresso:espresso-contrib:${version["espressoSdkVersion"]}",
+            "espresso-intents"         : "androidx.test.espresso:espresso-intents:${version["espressoSdkVersion"]}",
+            "canary-debug"             : "com.squareup.leakcanary:leakcanary-android:${version.canarySdkVersion}",
+            "logger"                   : "com.orhanobut:logger:2.2.0",
 
     ]
 
