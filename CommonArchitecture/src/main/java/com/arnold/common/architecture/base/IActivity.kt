@@ -60,7 +60,7 @@ interface IActivity {
      *
      * @param savedInstanceState
      */
-    fun initData(savedInstanceState: Bundle?)
+    fun initData(savedInstanceState: Bundle?){}
 
     /**
      * 这个 Activity 是否会使用 Fragment,框架会根据这个属性判断是否注册 [FragmentManager.FragmentLifecycleCallbacks]
