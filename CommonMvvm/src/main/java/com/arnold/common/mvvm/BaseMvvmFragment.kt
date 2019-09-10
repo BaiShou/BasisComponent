@@ -35,7 +35,16 @@ abstract class BaseMvvmFragment<VM : BaseViewModel<*>> : BaseFragment() {
             modelClass = BaseViewModel::class.java as Class<VM>
         }
 
-        mViewModel = ViewModelProviders.of(this, mViewModelFactory)[modelClass]
+        mViewModel = if (scopeTOActivity()){
+            ViewModelProviders.of(this.requireActivity(), mViewModelFactory)[modelClass]
+        }else {
+            ViewModelProviders.of(this, mViewModelFactory)[modelClass]
+        }
     }
+
+    /**
+     * ViewModel的生命周期是否在activity范围之内
+     */
+    open fun scopeTOActivity(): Boolean = false
 
 }

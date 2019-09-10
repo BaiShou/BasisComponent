@@ -28,19 +28,10 @@ interface IFragment {
     fun setupFragmentComponent(appComponent: AppComponent)
 
 
-    fun enableInject(): Boolean = false
-
-
-    fun enableARouterInject(): Boolean = false
-
-
     /**
-     * 是否使用 EventBus
-     * 确保依赖后, 将此方法返回 true,  会自动检测您依赖的 EventBus, 并自动注册
-     *
-     * @return 返回 `true`,  会自动注册 EventBus
+     * 如果 [layout] 不是Vewi或者(Int && != 0), 框架则不会调用 [Activity.setContentView],throw [IllegalArgumentException]
      */
-    fun useEventBus(): Boolean = false
+    fun layout(): Any
 
 
     /**
@@ -51,11 +42,7 @@ interface IFragment {
      * @param savedInstanceState
      * @return
      */
-    fun initView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View
+    fun initView(view: View, savedInstanceState: Bundle?)
 
     /**
      * 初始化数据
@@ -77,5 +64,21 @@ interface IFragment {
      * @param data 当不需要参数时 `data` 可以为 `null`
      */
     fun setData(data: Any)
+
+
+    fun enableInject(): Boolean = false
+
+
+    fun enableARouterInject(): Boolean = false
+
+
+    /**
+     * 是否使用 EventBus
+     * 确保依赖后, 将此方法返回 true,  会自动检测您依赖的 EventBus, 并自动注册
+     *
+     * @return 返回 `true`,  会自动注册 EventBus
+     */
+    fun useEventBus(): Boolean = false
+
 
 }
