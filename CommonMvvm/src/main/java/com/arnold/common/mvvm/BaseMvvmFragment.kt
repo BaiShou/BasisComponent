@@ -22,20 +22,29 @@ abstract class BaseMvvmFragment<VM : BaseViewModel<*>> : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
         initViewModel()
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     fun initViewModel() {
         val modelClass: Class<VM>
         val type = javaClass.genericSuperclass
-        if (type is ParameterizedType) {
-            modelClass = type.actualTypeArguments[1] as Class<VM>
+        modelClass = if (type is ParameterizedType) {
+            type.actualTypeArguments[1] as Class<VM>
         } else {
-            modelClass = BaseViewModel::class.java as Class<VM>
+            BaseViewModel::class.java as Class<VM>
         }
 
-        mViewModel = ViewModelProviders.of(this, mViewModelFactory)[modelClass]
+        mViewModel = if (scopeTOActivity()) {
+            ViewModelProviders.of(this.requireActivity(), mViewModelFactory)[modelClass]
+        } else {
+            ViewModelProviders.of(this, mViewModelFactory)[modelClass]
+        }
     }
+
+    /**
+     * ViewModel的生命周期是否在activity范围之内
+     */
+    open fun scopeTOActivity(): Boolean = false
 
 }

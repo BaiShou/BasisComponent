@@ -16,6 +16,7 @@ import io.reactivex.subjects.Subject
 abstract class BaseFragment : Fragment(), IFragment, FragmentLifecycleable {
     private val mLifecycleSubject = BehaviorSubject.create<FragmentEvent>()
     private var mCache: Cache<String, Any>? = null
+    private var contentView: View? = null
 
     override fun provideLifecycleSubject(): Subject<FragmentEvent> = mLifecycleSubject
 
@@ -33,7 +34,30 @@ abstract class BaseFragment : Fragment(), IFragment, FragmentLifecycleable {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return initView(inflater, container, savedInstanceState)
+
+        if (contentView == null) {
+            val layout = layout()
+            return if (layout is View) {
+                initView(layout, savedInstanceState)
+                contentView = layout
+                layout
+            } else if (layout is Int && layout != 0) {
+                val inflaterView = inflater.inflate(layout, container, false)
+                contentView = inflaterView
+                initView(inflaterView, savedInstanceState)
+                inflaterView
+            } else {
+                throw IllegalArgumentException("layout() return type no support, layout = $layout")
+            }
+        }
+
+        if (contentView?.parent != null) {
+            var parent = contentView?.parent
+            if (parent is ViewGroup) {
+                parent.removeView(contentView)
+            }
+        }
+        return contentView
     }
 
 }
