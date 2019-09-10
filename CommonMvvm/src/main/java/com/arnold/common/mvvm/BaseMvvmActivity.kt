@@ -14,10 +14,8 @@ abstract class BaseMvvmActivity<VM : BaseViewModel<*>> : BaseActivity() {
 
     var mViewModel: VM? = null
 
-    override
-
-    fun initData(savedInstanceState: Bundle?) {
-        //初始化ViewModel
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         initViewModel()
     }
 
