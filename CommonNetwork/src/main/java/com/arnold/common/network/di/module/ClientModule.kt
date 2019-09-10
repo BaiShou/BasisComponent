@@ -99,7 +99,7 @@ class ClientModule {
         // BASIC 请求/响应行
         // HEADER 请求/响应行 + 头
         // BODY 请求/响应行 + 头 + 体
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
         builder.connectTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
             .readTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
             .writeTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
