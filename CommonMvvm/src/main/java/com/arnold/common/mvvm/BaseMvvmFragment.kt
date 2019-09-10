@@ -22,8 +22,8 @@ abstract class BaseMvvmFragment<VM : BaseViewModel<*>> : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
         initViewModel()
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     fun initViewModel() {

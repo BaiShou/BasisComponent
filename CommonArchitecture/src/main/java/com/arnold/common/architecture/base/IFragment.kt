@@ -29,7 +29,7 @@ interface IFragment {
 
 
     /**
-     * 如果 [layout] 不是Vewi或者(Int && != 0), 框架则不会调用 [Activity.setContentView],throw [IllegalArgumentException]
+     * 如果 [layout] 不是Vewi或者(Int && != 0), 框架则不会调用 [initView],throw [IllegalArgumentException]
      */
     fun layout(): Any
 
@@ -37,8 +37,7 @@ interface IFragment {
     /**
      * 初始化 View
      *
-     * @param inflater
-     * @param container
+     * @param view
      * @param savedInstanceState
      * @return
      */
