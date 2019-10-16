@@ -19,9 +19,6 @@ import android.app.Application;
 import android.support.annotation.Nullable;
 
 
-import com.arnold.common.architecture.di.module.GlobalConfigModule;
-
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;

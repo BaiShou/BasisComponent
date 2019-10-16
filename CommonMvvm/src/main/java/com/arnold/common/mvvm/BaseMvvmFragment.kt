@@ -42,6 +42,7 @@ abstract class BaseMvvmFragment<VM : BaseViewModel<*>> : BaseFragment() {
         }
     }
 
+
     /**
      * ViewModel的生命周期是否在activity范围之内
      */

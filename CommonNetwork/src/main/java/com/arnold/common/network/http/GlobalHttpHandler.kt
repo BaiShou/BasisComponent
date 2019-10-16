@@ -6,6 +6,7 @@ import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.ResponseBody
+import java.io.IOException
 
 /**
  * 处理HTTP请求和响应结果的处理类
@@ -66,6 +67,7 @@ interface GlobalHttpHandler {
     value.close();
     }
      */
+    @Throws(IOException::class)
     fun <T : Any> onHttpInterceptResponse(
         adapter: TypeAdapter<T>,
         gson: Gson,

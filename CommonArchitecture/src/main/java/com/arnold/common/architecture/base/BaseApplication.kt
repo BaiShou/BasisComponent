@@ -5,18 +5,14 @@ import android.content.Context
 import com.arnold.common.architecture.base.delegate.AppDelegate
 import com.arnold.common.architecture.base.delegate.AppLifecycles
 import com.arnold.common.architecture.di.component.AppComponent
-import com.arnold.common.architecture.di.module.GlobalConfigModule
 import com.arnold.common.architecture.integration.ConfigModule
 import com.arnold.common.architecture.integration.ManifestParser
 import com.arnold.common.architecture.utils.Preconditions
-import javax.inject.Inject
 
 /**
  * 所有独立的modu都使用此类
  */
 class BaseApplication : Application(), App {
-
-    private val mModules: MutableList<ConfigModule> by lazy { ManifestParser(this).parse() }
 
     private val mAppDelegate: AppLifecycles by lazy { AppDelegate(this) }
 
@@ -58,25 +54,6 @@ class BaseApplication : Application(), App {
         )
 
         return (mAppDelegate as App).getAppComponent()
-    }
-
-    /**
-     * 将app的全局配置信息封装进module(使用Dagger注入到需要配置信息的地方)
-     * 需要在AndroidManifest中声明[ConfigModule]的实现类,和Glide的配置方式相似
-     *
-     * @return GlobalConfigModule
-     */
-    private fun getGlobalConfigModule(
-        context: Context,
-        modules: MutableList<ConfigModule>
-    ): GlobalConfigModule {
-        val builder = GlobalConfigModule.Builder()
-        //遍历 ConfigModule 集合, 给全局配置 GlobalConfigModule 添加参数
-        for (module in modules) {
-            module.applyOptions(context, builder)
-        }
-        builder.configModules(modules)
-        return builder.build()
     }
 
 }

@@ -17,6 +17,9 @@ package com.arnold.common.architecture.integration;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import retrofit2.Retrofit;
 
 
 /**
@@ -57,4 +60,10 @@ public interface IRepositoryManager {
      */
     @NonNull
     Context getContext();
+
+    interface ObtainServiceDelegate {
+
+        @Nullable
+        <T> T createRetrofitService(Retrofit retrofit, Class<T> serviceClass);
+    }
 }

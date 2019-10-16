@@ -2,14 +2,15 @@ package com.arnold.common.architecture.di.module
 
 import android.app.Application
 import android.text.TextUtils
-import com.arnold.common.architecture.http.BaseUrl
 import com.arnold.common.architecture.integration.ConfigModule
+import com.arnold.common.architecture.integration.IRepositoryManager
 import com.arnold.common.architecture.integration.cache.Cache
 import com.arnold.common.architecture.integration.cache.CacheType
 import com.arnold.common.architecture.integration.cache.IntelligentCache
 import com.arnold.common.architecture.integration.cache.LruCache
 import com.arnold.common.architecture.utils.Preconditions
 import com.arnold.common.network.di.module.ClientModule
+import com.arnold.common.network.http.BaseUrl
 import com.arnold.common.network.http.GlobalHttpHandler
 import com.arnold.common.repository.di.module.RepositoryModule
 import dagger.Module
@@ -21,6 +22,7 @@ import okhttp3.internal.threadFactory
 import java.io.File
 import java.util.concurrent.*
 import javax.inject.Singleton
+
 
 /**
  * 后期看能不能使用with进行修改
@@ -40,6 +42,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
     private val mCacheFactory: Cache.Factory<String, Any>?
     private val mExecutorService: ExecutorService?
     private val mModules: MutableList<ConfigModule>
+    private val mObtainServiceDelegate: IRepositoryManager.ObtainServiceDelegate?
 
     init {
         this.mApiUrl = builder.apiUrl
@@ -56,6 +59,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
 
         this.mCacheFactory = builder.cacheFactory
         this.mExecutorService = builder.executorService
+        this.mObtainServiceDelegate = builder.obtainServiceDelegate;
     }
 
     /**
@@ -169,6 +173,12 @@ class GlobalConfigModule private constructor(builder: Builder) {
         )
     }
 
+    @Singleton
+    @Provides
+    fun provideObtainServiceDelegate(): IRepositoryManager.ObtainServiceDelegate? {
+        return mObtainServiceDelegate
+    }
+
     class Builder {
         var apiUrl: HttpUrl? = null
         var baseUrl: BaseUrl? = null
@@ -183,6 +193,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
 
         var cacheFactory: Cache.Factory<String, Any>? = null
         var executorService: ExecutorService? = null
+        var obtainServiceDelegate: IRepositoryManager.ObtainServiceDelegate? = null
 
         fun baseurl(baseUrl: String): Builder {//基础url
             if (TextUtils.isEmpty(baseUrl)) {
@@ -248,6 +259,11 @@ class GlobalConfigModule private constructor(builder: Builder) {
 
         fun executorService(executorService: ExecutorService): Builder {
             this.executorService = executorService
+            return this
+        }
+
+        fun obtainServiceDelegate(obtainServiceDelegate: IRepositoryManager.ObtainServiceDelegate): Builder {
+            this.obtainServiceDelegate = obtainServiceDelegate
             return this
         }
 

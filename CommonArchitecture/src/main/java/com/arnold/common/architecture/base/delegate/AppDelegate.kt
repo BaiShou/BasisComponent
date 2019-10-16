@@ -29,10 +29,6 @@ class AppDelegate(context: Context) : AppLifecycles, App {
     @field:Named("ActivityLifecycle")
     lateinit var mActivityLifecycle: Application.ActivityLifecycleCallbacks
 
-    @Inject
-    @field:Named("ActivityLifecycleForRxLifecycle")
-    lateinit var mActivityLifecycleForRxLifecycle: Application.ActivityLifecycleCallbacks
-
     private var mAppLifecycles: MutableList<AppLifecycles> = ArrayList()
 
     private var mActivityLifecycles: MutableList<Application.ActivityLifecycleCallbacks> =
@@ -75,10 +71,6 @@ class AppDelegate(context: Context) : AppLifecycles, App {
         //注册框架内部已实现的 Activity 生命周期逻辑
         application.registerActivityLifecycleCallbacks(mActivityLifecycle)
 
-        //注册框架内部已实现的 RxLifecycle 逻辑
-        application.registerActivityLifecycleCallbacks(mActivityLifecycleForRxLifecycle)
-
-
         //注册框架外部, 开发者扩展的 Activity 生命周期逻辑
         //每个 ConfigModule 的实现类可以声明多个 Activity 的生命周期回调
         //也可以有 N 个 ConfigModule 的实现类 (完美支持组件化项目 各个 Module 的各种独特需求)
@@ -96,7 +88,6 @@ class AppDelegate(context: Context) : AppLifecycles, App {
     override fun onTerminate(application: Application) {
 
         mApplication?.unregisterActivityLifecycleCallbacks(mActivityLifecycle)
-        mApplication?.unregisterActivityLifecycleCallbacks(mActivityLifecycleForRxLifecycle)
 
         if (mActivityLifecycles.size > 0) {
             for (lifecycle in mActivityLifecycles) {

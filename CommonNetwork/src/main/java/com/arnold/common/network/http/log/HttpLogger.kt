@@ -1,4 +1,4 @@
-package com.arnold.common.architecture.http.log
+package com.arnold.common.network.http.log
 
 import android.text.TextUtils
 import com.arnold.common.architecture.utils.LogUtil

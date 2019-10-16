@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentManager
 import com.arnold.common.architecture.integration.*
 import com.arnold.common.architecture.integration.cache.Cache
 import com.arnold.common.architecture.integration.cache.CacheType
-import com.arnold.common.architecture.integration.lifecycle.ActivityLifecycleForRxLifecycle
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Binds
@@ -65,10 +64,6 @@ abstract class AppModuleBinds {
     @Binds
     @Named("ActivityLifecycle")
     internal abstract fun bindActivityLifecycle(activityLifecycle: ActivityLifecycle): Application.ActivityLifecycleCallbacks
-
-    @Binds
-    @Named("ActivityLifecycleForRxLifecycle")
-    internal abstract fun bindActivityLifecycleForRxLifecycle(activityLifecycleForRxLifecycle: ActivityLifecycleForRxLifecycle): Application.ActivityLifecycleCallbacks
 
     @Binds
     internal abstract fun bindFragmentLifecycle(fragmentLifecycle: FragmentLifecycle): FragmentManager.FragmentLifecycleCallbacks
