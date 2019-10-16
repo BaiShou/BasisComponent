@@ -1,10 +1,10 @@
 package com.arnold.common.mvp.utils;
 
-import com.arnold.common.architecture.integration.lifecycle.ActivityLifecycleable;
-import com.arnold.common.architecture.integration.lifecycle.FragmentLifecycleable;
-import com.arnold.common.architecture.integration.lifecycle.Lifecycleable;
 import com.arnold.common.architecture.utils.Preconditions;
 import com.arnold.common.mvp.IView;
+import com.arnold.common.mvp.integration.lifecycle.ActivityLifecycleable;
+import com.arnold.common.mvp.integration.lifecycle.FragmentLifecycleable;
+import com.arnold.common.mvp.integration.lifecycle.Lifecycleable;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.RxLifecycle;
 import com.trello.rxlifecycle2.android.ActivityEvent;
