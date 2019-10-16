@@ -1,25 +1,17 @@
 package com.arnold.common.architecture.base
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.arnold.common.architecture.integration.cache.Cache
 import com.arnold.common.architecture.integration.cache.CacheType
-import com.arnold.common.architecture.integration.lifecycle.ActivityLifecycleable
 import com.arnold.common.architecture.utils.obtainAppComponentFromContext
-import com.trello.rxlifecycle2.android.ActivityEvent
-import io.reactivex.subjects.BehaviorSubject
-import io.reactivex.subjects.Subject
 
 /**
  * 当需要继承特定的[actiivty]第三方库时，自己自定义一个[activity]，再按照[BaseActivity]的格式复制过去
  */
-abstract class BaseActivity : AppCompatActivity(), IActivity,
-    ActivityLifecycleable {
-
-    private val mLifecycleSubject = BehaviorSubject.create<ActivityEvent>()
+abstract class BaseActivity : AppCompatActivity(), IActivity{
 
     lateinit var context: Activity
 
@@ -32,9 +24,6 @@ abstract class BaseActivity : AppCompatActivity(), IActivity,
         return mCache
     }
 
-    override fun provideLifecycleSubject(): Subject<ActivityEvent> {
-        return mLifecycleSubject
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +41,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivity,
 
         initView(savedInstanceState)
 
+//        initData(savedInstanceState)
     }
 
 }

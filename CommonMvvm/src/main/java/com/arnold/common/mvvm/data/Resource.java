@@ -1,9 +1,8 @@
 package com.arnold.common.mvvm.data;
 
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class Resource<T> {
 

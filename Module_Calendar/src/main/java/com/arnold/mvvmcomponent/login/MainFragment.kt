@@ -10,20 +10,17 @@ import com.arnold.mvvmcomponent.login.di.component.DaggerLoginFragmentComponent
 import com.arnold.mvvmcomponent.login.model.LoginFragmentViewModel
 
 class MainFragment : BaseMvvmFragment<LoginFragmentViewModel>() {
+    override fun layout(): Any = R.layout.calendar_fragment_main
+
+    override fun initView(view: View, savedInstanceState: Bundle?) {
+    }
+
     override fun setupFragmentComponent(appComponent: AppComponent) {
         DaggerLoginFragmentComponent
             .builder()
             .appComponent(appComponent)
             .build()
             .inject(this)
-    }
-
-    override fun initView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return inflater.inflate(R.layout.calendar_fragment_main, container, false)
     }
 
     override fun initData(savedInstanceState: Bundle?) {

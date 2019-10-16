@@ -20,8 +20,6 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.arnold.common.architecture.di.module.GlobalConfigModule;
-
 import java.util.Set;
 
 

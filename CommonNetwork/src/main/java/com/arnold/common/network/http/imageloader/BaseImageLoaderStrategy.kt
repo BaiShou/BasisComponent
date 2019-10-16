@@ -1,4 +1,4 @@
-package com.arnold.common.architecture.http.imageloader
+package com.arnold.common.network.http.imageloader
 
 interface BaseImageLoaderStrategy {
 }

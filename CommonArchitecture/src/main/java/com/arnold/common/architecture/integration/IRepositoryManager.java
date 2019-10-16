@@ -18,6 +18,9 @@ package com.arnold.common.architecture.integration;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import retrofit2.Retrofit;
 
 /**
  * 用来管理网络请求层,以及数据缓存层
@@ -57,4 +60,10 @@ public interface IRepositoryManager {
      */
     @NonNull
     Context getContext();
+
+    interface ObtainServiceDelegate {
+
+        @Nullable
+        <T> T createRetrofitService(Retrofit retrofit, Class<T> serviceClass);
+    }
 }

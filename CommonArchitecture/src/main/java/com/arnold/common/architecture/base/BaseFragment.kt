@@ -7,18 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.arnold.common.architecture.integration.cache.Cache
 import com.arnold.common.architecture.integration.cache.CacheType
-import com.arnold.common.architecture.integration.lifecycle.FragmentLifecycleable
 import com.arnold.common.architecture.utils.obtainAppComponentFromContext
-import com.trello.rxlifecycle2.android.FragmentEvent
-import io.reactivex.subjects.BehaviorSubject
-import io.reactivex.subjects.Subject
 
-abstract class BaseFragment : Fragment(), IFragment, FragmentLifecycleable {
-    private val mLifecycleSubject = BehaviorSubject.create<FragmentEvent>()
+abstract class BaseFragment : Fragment(), IFragment {
+
     private var mCache: Cache<String, Any>? = null
     private var contentView: View? = null
 
-    override fun provideLifecycleSubject(): Subject<FragmentEvent> = mLifecycleSubject
+
 
     @Synchronized
     override fun provideCache(): Cache<String, Any> {

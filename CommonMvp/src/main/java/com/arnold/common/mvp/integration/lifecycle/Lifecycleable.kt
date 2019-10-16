@@ -1,4 +1,4 @@
-package com.arnold.common.architecture.integration.lifecycle
+package com.arnold.common.mvp.integration.lifecycle
 
 import io.reactivex.subjects.Subject
 

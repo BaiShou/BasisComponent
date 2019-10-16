@@ -1,4 +1,4 @@
-package com.arnold.common.architecture.http
+package com.arnold.common.network.http
 
 import okhttp3.HttpUrl
 

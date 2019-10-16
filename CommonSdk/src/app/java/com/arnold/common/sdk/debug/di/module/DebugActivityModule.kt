@@ -31,6 +31,6 @@ abstract class DebugActivityInternalModule {
     @Binds
     @IntoMap
     @ViewModelKey(DebugViewModel::class)
-    abstract fun provideDebugViewModel(loginViewModel: DebugViewModel): ViewModel
+    abstract fun provideDebugViewModel(debugViewModel: DebugViewModel): ViewModel
 
 }

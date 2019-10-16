@@ -1,6 +1,4 @@
-package com.android.base.data
-
-import com.arnold.common.mvvm.data.Resource
+package com.arnold.common.mvvm.data
 
 /**when in loading*/
 inline fun <T> Resource<T>.onLoading(onLoading: () -> Unit): Resource<T> {
