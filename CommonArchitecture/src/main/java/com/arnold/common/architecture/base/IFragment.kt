@@ -77,6 +77,6 @@ interface IFragment {
      *
      * @param data 当不需要参数时 `data` 可以为 `null`
      */
-    fun setData(data: Any)
+    fun setData(data: Any){}
 
 }

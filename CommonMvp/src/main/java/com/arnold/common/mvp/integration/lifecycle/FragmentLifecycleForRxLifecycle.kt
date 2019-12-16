@@ -12,10 +12,7 @@ import javax.inject.Singleton
 /**
  * 配合 [FragmentLifecycleable] 使用,使 [Fragment] 具有 [RxLifecycle] 的特性
  */
-@Singleton
-class FragmentLifecycleForRxLifecycle
-@Inject
-constructor() : FragmentManager.FragmentLifecycleCallbacks() {
+class FragmentLifecycleForRxLifecycle : FragmentManager.FragmentLifecycleCallbacks() {
 
     override fun onFragmentAttached(fm: FragmentManager, f: Fragment, context: Context) {
         if (f is FragmentLifecycleable) {

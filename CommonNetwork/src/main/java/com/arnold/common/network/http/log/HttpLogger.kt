@@ -1,21 +1,21 @@
 package com.arnold.common.network.http.log
 
 import android.text.TextUtils
-import com.arnold.common.architecture.utils.LogUtil
+import com.arnold.common.network.utils.LogUtil
 import com.arnold.common.network.utils.decodeUnicode
 import com.arnold.common.network.utils.formatJson
 import okhttp3.logging.HttpLoggingInterceptor
 
 class HttpLogger : HttpLoggingInterceptor.Logger {
 
-    private val mMessage = StringBuilder()
+    private val mMessage = StringBuffer()
     override fun log(message: String) {
         if (TextUtils.isEmpty(message)) {
             LogUtil.i("请求日志null")
             return
         }
 
-        if (message.startsWith("--> POST")) {
+        if (message.startsWith("--> POST") || message.startsWith("--> GET")) {
             mMessage.setLength(0)
         }
 

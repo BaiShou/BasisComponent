@@ -29,7 +29,10 @@ abstract class BaseMvpActivity<P : IPresenter> : BaseActivity(), IView ,
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter.onDestroy()
+        if (::presenter.isInitialized){
+            presenter.onDestroy()
+        }
+
     }
 
 }

@@ -1,6 +1,11 @@
 package com.arnold.common.mvp
 
+import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.LifecycleObserver
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.OnLifecycleEvent
 import com.arnold.common.architecture.integration.IRepositoryManager
+
 
 /**
  * @author：tian
@@ -11,9 +16,14 @@ import com.arnold.common.architecture.integration.IRepositoryManager
  * 修改时间：
  * 修改备注：
  */
-class BaseModel(var mRepositoryManager: IRepositoryManager?) : IModel {
+open class BaseModel(var mRepositoryManager: IRepositoryManager?) : IModel, LifecycleObserver {
 
     override fun onDestroy() {
         mRepositoryManager = null
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    open fun onDestroy(owner: LifecycleOwner) {
+        owner.lifecycle.removeObserver(this)
     }
 }

@@ -1,5 +1,6 @@
 package com.arnold.common.mvp.utils;
 
+
 import com.arnold.common.architecture.utils.Preconditions;
 import com.arnold.common.mvp.IView;
 import com.arnold.common.mvp.integration.lifecycle.ActivityLifecycleable;

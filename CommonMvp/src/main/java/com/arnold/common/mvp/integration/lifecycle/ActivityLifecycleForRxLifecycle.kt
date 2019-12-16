@@ -13,23 +13,20 @@ import javax.inject.Singleton
 /**
  * 配合 [ActivityLifecycleable] 使用,使 [Activity] 具有 [RxLifecycle] 的特性
  */
-@Singleton
-class ActivityLifecycleForRxLifecycle
-@Inject
-constructor() : Application.ActivityLifecycleCallbacks {
+class ActivityLifecycleForRxLifecycle : Application.ActivityLifecycleCallbacks {
 
-    @Inject
-    internal lateinit var mFragmentLifecycle: Lazy<FragmentLifecycleForRxLifecycle>
+//    @Inject
+//    internal lateinit var mFragmentLifecycle: Lazy<FragmentLifecycleForRxLifecycle>
 
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         if (activity is ActivityLifecycleable) {
             obtainSubject(activity).onNext(ActivityEvent.CREATE)
-            if (activity is FragmentActivity) {
-                (activity as FragmentActivity).supportFragmentManager.registerFragmentLifecycleCallbacks(
-                    mFragmentLifecycle.get(), true
-                )
-            }
+//            if (activity is FragmentActivity) {
+//                (activity as FragmentActivity).supportFragmentManager.registerFragmentLifecycleCallbacks(
+//                    mFragmentLifecycle.get(), true
+//                )
+//            }
         }
     }
 

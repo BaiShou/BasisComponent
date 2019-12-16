@@ -27,7 +27,7 @@ import kotlin.text.Charsets.UTF_8
 class ClientModule {
 
     companion object {
-        private const val TIME_OUT = 10
+        private const val TIME_OUT = 60
     }
 
     /**

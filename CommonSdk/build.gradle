@@ -56,6 +56,7 @@ dependencies {
     implementation rootProject.ext.dependencies["appcompat-v7"]
     implementation rootProject.ext.dependencies["support-v4"]
     api project(path: ':CommonMvvm')
+    api project(path: ':CommonMvp')
     api project(path: ':CommonView')
     if (isBuildModule.toBoolean()) {
         kapt rootProject.ext.dependencies["dagger2-compiler"]

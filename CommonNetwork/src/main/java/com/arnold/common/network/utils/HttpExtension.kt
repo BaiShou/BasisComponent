@@ -12,21 +12,21 @@ fun MediaType.isText(): Boolean {
 }
 
 fun MediaType.isPlain(): Boolean {
-    return this.type.toLowerCase() == "plain"
+    return this.subtype.toLowerCase().contains("plain")
 }
 
 fun MediaType.isJson(): Boolean {
-    return this.type.toLowerCase() == "json"
+    return this.subtype.toLowerCase().contains("json")
 }
 
 fun MediaType.isXml(): Boolean {
-    return this.type.toLowerCase() == "isXml"
+    return this.subtype.toLowerCase().contains("xml")
 }
 
 fun MediaType.isHtml(): Boolean {
-    return this.type.toLowerCase() == "html"
+    return this.subtype.toLowerCase().contains("html")
 }
 
 fun MediaType.isForm(): Boolean {
-    return this.type.toLowerCase() == "x-www-form-urlencoded"
+    return this.subtype.toLowerCase().contains("x-www-form-urlencoded")
 }

@@ -4,6 +4,8 @@ import android.app.Activity
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.view.ViewGroup
+import android.view.Window
 import com.arnold.common.architecture.integration.cache.Cache
 import com.arnold.common.architecture.integration.cache.CacheType
 import com.arnold.common.architecture.utils.obtainAppComponentFromContext
@@ -12,7 +14,7 @@ import com.arnold.common.architecture.utils.obtainAppComponentFromContext
 /**
  * 当需要继承特定的[actiivty]第三方库时，自己自定义一个[activity]，再按照[BaseActivity]的格式复制过去
  */
-abstract class BaseActivity : AppCompatActivity(), IActivity{
+abstract class  BaseActivity : AppCompatActivity(), IActivity{
 
     lateinit var context: Activity
 
@@ -43,6 +45,10 @@ abstract class BaseActivity : AppCompatActivity(), IActivity{
         initView(savedInstanceState)
 
 //        initData(savedInstanceState)
+    }
+
+    open fun getContentView(): ViewGroup {
+        return findViewById(Window.ID_ANDROID_CONTENT)
     }
 
 }

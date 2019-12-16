@@ -6,7 +6,7 @@ import android.app.Dialog
 import android.app.Service
 import android.content.Intent
 import android.os.Message
-import com.arnold.common.architecture.utils.LogUtil
+import com.arnold.common.network.utils.LogUtil
 import java.util.*
 
 open class AppManager private constructor() {

@@ -127,12 +127,12 @@
   例如请求的BaseURL,在【CommonSdk】模块中`com.arnold.common.sdk.app.GlobalConfiguration`进行配置，
 
 ## 开发模式
-项目中提供了MVVM以及MVP的架构。后续的项目的初始化，选择其中一种开发就行
+项目中提供了MVVM以及MVP的架构。后续的项目开发，可以其中一种模式开发也可以两种模式融合使用。**非组件化项目不建议一个项目采用两种模式开发**
 
 ## MVVM
 - V: Actvity/Fragment
 - VM：VM 为视图提供数据，主要方式为提供 LiveData 或者 Rx 的数据源、或者某些数据可以直接返回的，则提供对应的方法或属性供 V 直接访问。
-  - LiveData 不一定就是作出成员，也可以作为方法的返回值直接返回。
+  - LiveData 不一定就需要在类中创建实例对象，也可以作为方法的返回值直接返回。
   - LiveData 的使用不要局限于 VM 中，没有限制，只要场景适合，就可以使用。
 - M：负责数据的存储和获取，统一命名为 xxxModel。
 - MVVM 三者通过 Dagger2 进行绑定

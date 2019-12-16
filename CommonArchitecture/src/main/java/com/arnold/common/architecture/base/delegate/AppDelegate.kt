@@ -10,10 +10,12 @@ import com.arnold.common.architecture.integration.ConfigModule
 import com.arnold.common.architecture.integration.ManifestParser
 import com.arnold.common.architecture.integration.cache.IntelligentCache
 import com.arnold.common.architecture.utils.Preconditions
+import com.arnold.common.architecture.utils.getProcessName
 import com.tencent.mmkv.MMKV
-import java.util.ArrayList
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Named
+
 
 /**
  * AppDelegate 可以代理 Application 的生命周期,在对应的生命周期,执行对应的逻辑
@@ -32,7 +34,7 @@ class AppDelegate(context: Context) : AppLifecycles, App {
     private var mAppLifecycles: MutableList<AppLifecycles> = ArrayList()
 
     private var mActivityLifecycles: MutableList<Application.ActivityLifecycleCallbacks> =
-        ArrayList()
+            ArrayList()
 
     init {
         //遍历之前获得的集合, 执行每一个 ConfigModule 实现类的某些方法
@@ -53,20 +55,23 @@ class AppDelegate(context: Context) : AppLifecycles, App {
     }
 
     override fun onCreate(application: Application) {
+        //多线程防止多次初始化
+        if (application.getProcessName() != application.packageName) {
+            return
+        }
         this.mApplication = application
         MMKV.initialize(application)
+//        MMKV.mmkvWithID("ehr", MMKV.MULTI_PROCESS_MODE).encode("bool", true)
         mAppComponent = DaggerAppComponent
-            .builder()
-            .application(application)
-            .globalConfigModule(getGlobalConfigModule(application, mModules))
-            .build()
+                .builder()
+                .application(application)
+                .globalConfigModule(getGlobalConfigModule(application, mModules))
+                .build()
         mAppComponent?.inject(this)
 
         mAppComponent?.let {
             it.extras().put(IntelligentCache.getKeyOfKeep(ConfigModule::class.java.name), mModules)
         }
-
-
 
         //注册框架内部已实现的 Activity 生命周期逻辑
         application.registerActivityLifecycleCallbacks(mActivityLifecycle)
@@ -107,12 +112,12 @@ class AppDelegate(context: Context) : AppLifecycles, App {
 
     override fun getAppComponent(): AppComponent {
         Preconditions.checkNotNull(
-            mAppComponent,
-            "%s == null, first call %s#onCreate(Application) in %s#onCreate()",
-            AppComponent::class.java.name, javaClass.name, if (mApplication == null)
-                Application::class.java.name
-            else
-                mApplication!!.javaClass.name
+                mAppComponent,
+                "%s == null, first call %s#onCreate(Application) in %s#onCreate()",
+                AppComponent::class.java.name, javaClass.name, if (mApplication == null)
+            Application::class.java.name
+        else
+            mApplication!!.javaClass.name
         )
         return mAppComponent!!
     }
@@ -124,8 +129,8 @@ class AppDelegate(context: Context) : AppLifecycles, App {
      * @return GlobalConfigModule
      */
     private fun getGlobalConfigModule(
-        context: Context,
-        modules: MutableList<ConfigModule>
+            context: Context,
+            modules: MutableList<ConfigModule>
     ): GlobalConfigModule {
         val builder = GlobalConfigModule.Builder()
 
@@ -139,4 +144,5 @@ class AppDelegate(context: Context) : AppLifecycles, App {
 
         return builder.build()
     }
+
 }
