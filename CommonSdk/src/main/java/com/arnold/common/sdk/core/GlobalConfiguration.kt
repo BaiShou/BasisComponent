@@ -4,19 +4,17 @@ import android.app.Application
 import android.content.Context
 import android.text.TextUtils
 import androidx.fragment.app.FragmentManager
+import com.alibaba.android.arouter.launcher.ARouter
 import com.arnold.common.architecture.base.delegate.AppLifecycles
 import com.arnold.common.architecture.di.module.AppModule
 import com.arnold.common.architecture.di.module.GlobalConfigModule
 import com.arnold.common.architecture.integration.ConfigModule
-import okhttp3.OkHttpClient
-import com.google.gson.GsonBuilder
-import io.rx_cache2.internal.RxCache
-import com.alibaba.android.arouter.launcher.ARouter
-import com.arnold.common.architecture.utils.LogUtil
 import com.arnold.common.network.di.module.ClientModule
-import com.arnold.common.repository.di.module.RepositoryModule
+import com.arnold.common.network.utils.LogUtil
 import com.arnold.common.repository.utils.DataHelper
 import com.arnold.common.sdk.BuildConfig
+import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
 
 /**
  * 所有模块的公共初始化配置文件
@@ -41,13 +39,6 @@ class GlobalConfiguration : ConfigModule {
             .okhttpConfiguration(object : ClientModule.OkhttpConfiguration {
                 override fun configOkhttp(context: Context, builder: OkHttpClient.Builder) {
 
-                }
-            })
-            .rxCacheConfiguration(object : RepositoryModule.RxCacheConfiguration {
-                override fun configRxCache(context: Context, builder: RxCache.Builder): RxCache? {
-                    //这里可以自己自定义配置RxCache的参数
-                    builder.useExpiredDataIfLoaderNotAvailable(true)
-                    return null
                 }
             })
     }

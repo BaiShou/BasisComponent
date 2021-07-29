@@ -3,6 +3,7 @@ package com.arnold.common.repository.utils
 import android.content.Context
 import android.os.Environment
 import android.os.Parcelable
+import android.util.Log
 import com.tencent.mmkv.MMKV
 import java.io.*
 import java.util.*
@@ -26,7 +27,9 @@ object DataHelper {
             is Long -> mmkv.encode(key, value)
             is Double -> mmkv.encode(key, value)
             is ByteArray -> mmkv.encode(key, value)
-            is Nothing -> return
+            else -> {
+                Log.e("EHR_LOG", "DataHelper encode type error")
+            }
         }
     }
 
@@ -66,12 +69,16 @@ object DataHelper {
         return mmkv.decodeString(key, "")
     }
 
-    fun <T : Parcelable> decodeParcelable(key: String, tClass: Class<T>): T {
+    fun <T : Parcelable> decodeParcelable(key: String, tClass: Class<T>): T? {
         return mmkv.decodeParcelable(key, tClass)
     }
 
     fun decodeStringSet(key: String): Set<String> {
         return mmkv.decodeStringSet(key, Collections.emptySet())
+    }
+
+    fun containsKey(key: String): Boolean {
+        return mmkv.containsKey(key)
     }
 
     fun removeKey(key: String) {

@@ -186,7 +186,6 @@ public class ZipHelper {
      *
      * @param string
      * @return
-     * @throws IOException
      */
     public static byte[] compressForGzip(String string) {
         ByteArrayOutputStream os = null;
@@ -211,7 +210,6 @@ public class ZipHelper {
      *
      * @param compressed
      * @return
-     * @throws IOException
      */
     public static String decompressForGzip(byte[] compressed) {
         return decompressForGzip(compressed, "UTF-8");

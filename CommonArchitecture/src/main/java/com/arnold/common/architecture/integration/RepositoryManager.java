@@ -31,7 +31,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Lazy;
-import io.rx_cache2.internal.RxCache;
 import retrofit2.Retrofit;
 
 @SuppressWarnings("unchecked")
@@ -40,8 +39,7 @@ public class RepositoryManager implements IRepositoryManager {
 
     @Inject
     Lazy<Retrofit> mRetrofit;
-    @Inject
-    Lazy<RxCache> mRxCache;
+
     @Inject
     Application mApplication;
     @Inject
@@ -88,37 +86,30 @@ public class RepositoryManager implements IRepositoryManager {
         return retrofitService;
     }
 
-    /**
-     * 根据传入的 Class 获取对应的 RxCache service
-     *
-     * @param cacheClass Cache class
-     * @param <T>        Cache class
-     * @return Cache
-     */
-    @NonNull
-    @Override
-    public synchronized <T> T obtainCacheService(@NonNull Class<T> cacheClass) {
-        Preconditions.checkNotNull(cacheClass, "cacheClass == null");
-        if (mCacheServiceCache == null) {
-            mCacheServiceCache = mCacheFactory.build(CacheType.CACHE_SERVICE_CACHE);
-        }
-        Preconditions.checkNotNull(mCacheServiceCache,
-                "Cannot return null from a Cache.Factory#build(int) method");
-        T cacheService = (T) mCacheServiceCache.get(cacheClass.getCanonicalName());
-        if (cacheService == null) {
-            cacheService = mRxCache.get().using(cacheClass);
-            mCacheServiceCache.put(cacheClass.getCanonicalName(), cacheService);
-        }
-        return cacheService;
-    }
+//    /**
+//     * 根据传入的 Class 获取对应的 RxCache service
+//     *
+//     * @param cacheClass Cache class
+//     * @param <T>        Cache class
+//     * @return Cache
+//     */
+//    @NonNull
+//    @Override
+//    public synchronized <T> T obtainCacheService(@NonNull Class<T> cacheClass) {
+//        Preconditions.checkNotNull(cacheClass, "cacheClass == null");
+//        if (mCacheServiceCache == null) {
+//            mCacheServiceCache = mCacheFactory.build(CacheType.CACHE_SERVICE_CACHE);
+//        }
+//        Preconditions.checkNotNull(mCacheServiceCache,
+//                "Cannot return null from a Cache.Factory#build(int) method");
+//        T cacheService = (T) mCacheServiceCache.get(cacheClass.getCanonicalName());
+//        if (cacheService == null) {
+//            cacheService = mRxCache.get().using(cacheClass);
+//            mCacheServiceCache.put(cacheClass.getCanonicalName(), cacheService);
+//        }
+//        return cacheService;
+//    }
 
-    /**
-     * 清理所有缓存
-     */
-    @Override
-    public void clearAllCache() {
-        mRxCache.get().evictAll().subscribe();
-    }
 
     @NonNull
     @Override

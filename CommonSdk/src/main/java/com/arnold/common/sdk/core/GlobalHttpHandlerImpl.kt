@@ -3,6 +3,7 @@ package com.arnold.common.sdk.core
 import android.content.Context
 import com.arnold.common.network.http.GlobalHttpHandler
 import com.arnold.common.repository.utils.DataHelper
+import com.arnold.common.sdk.BuildConfig
 import com.arnold.common.sdk.http.BaseResp
 import com.arnold.common.sdk.http.exception.NetApiException
 import com.google.gson.Gson
@@ -12,11 +13,6 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import java.io.ByteArrayInputStream
 import java.io.InputStreamReader
 import kotlin.text.Charsets.UTF_8
-import android.R.attr.port
-import android.R.attr.host
-import android.R.attr.scheme
-import com.arnold.common.sdk.BuildConfig
-import okhttp3.HttpUrl
 
 
 class GlobalHttpHandlerImpl(val context: Context) : GlobalHttpHandler {

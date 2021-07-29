@@ -7,7 +7,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.alibaba.android.arouter.launcher.ARouter
 import com.arnold.common.architecture.base.IFragment
-import com.arnold.common.architecture.utils.LogUtil
+import com.arnold.common.network.utils.LogUtil
 
 
 class FragmentLifecycleCallbacksImpl : FragmentManager.FragmentLifecycleCallbacks() {

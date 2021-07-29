@@ -14,12 +14,12 @@ import dagger.Provides
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 import okhttp3.ResponseBody
 import okio.Buffer
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import kotlin.text.Charsets.UTF_8
 
 
@@ -27,7 +27,7 @@ import kotlin.text.Charsets.UTF_8
 class ClientModule {
 
     companion object {
-        private const val TIME_OUT = 10
+        private const val TIME_OUT = 60
     }
 
     /**
@@ -57,7 +57,7 @@ class ClientModule {
             .client(client)//设置 OkHttp
 
         builder
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())//使用 RxJava
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())//使用 RxJava
             .addConverterFactory(CustomGsonConverterFactory.create(gson, handler))//使用 Gson
 
         configuration?.let {

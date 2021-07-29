@@ -15,7 +15,7 @@
  */
 package com.arnold.common.architecture.integration.cache;
 
-import android.app.Activity;
+
 import android.app.ActivityManager;
 import android.content.Context;
 
@@ -107,7 +107,7 @@ public interface CacheType {
     };
 
     /**
-     * {@link Activity} 中存储数据的容器
+     *  Activity 中存储数据的容器
      */
     CacheType ACTIVITY_CACHE = new CacheType() {
         private static final int MAX_SIZE = 80;

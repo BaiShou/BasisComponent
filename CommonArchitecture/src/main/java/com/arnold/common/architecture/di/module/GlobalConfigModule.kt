@@ -23,6 +23,7 @@ import java.io.File
 import java.util.concurrent.*
 import javax.inject.Singleton
 
+
 /**
  * 后期看能不能使用with进行修改
  * https://juejin.im/post/59f17a5b51882549fc51412e
@@ -36,7 +37,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
     private val mCacheFile: File?
     private val mRetrofitConfiguration: ClientModule.RetrofitConfiguration?
     private val mOkhttpConfiguration: ClientModule.OkhttpConfiguration?
-    private val mRxCacheConfiguration: RepositoryModule.RxCacheConfiguration?
+
     private val mGsonConfiguration: AppModule.GsonConfiguration?
     private val mCacheFactory: Cache.Factory<String, Any>?
     private val mExecutorService: ExecutorService?
@@ -53,7 +54,6 @@ class GlobalConfigModule private constructor(builder: Builder) {
         this.mCacheFile = builder.cacheFile
         this.mRetrofitConfiguration = builder.retrofitConfiguration
         this.mOkhttpConfiguration = builder.okhttpConfiguration
-        this.mRxCacheConfiguration = builder.rxCacheConfiguration
         this.mGsonConfiguration = builder.gsonConfiguration
 
         this.mCacheFactory = builder.cacheFactory
@@ -124,11 +124,6 @@ class GlobalConfigModule private constructor(builder: Builder) {
         return mOkhttpConfiguration
     }
 
-    @Singleton
-    @Provides
-    internal fun provideRxCacheConfiguration(): RepositoryModule.RxCacheConfiguration? {
-        return mRxCacheConfiguration
-    }
 
     @Singleton
     @Provides
@@ -187,7 +182,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
         var cacheFile: File? = null
         var retrofitConfiguration: ClientModule.RetrofitConfiguration? = null
         var okhttpConfiguration: ClientModule.OkhttpConfiguration? = null
-        var rxCacheConfiguration: RepositoryModule.RxCacheConfiguration? = null
+
         var gsonConfiguration: AppModule.GsonConfiguration? = null
 
         var cacheFactory: Cache.Factory<String, Any>? = null
@@ -240,10 +235,7 @@ class GlobalConfigModule private constructor(builder: Builder) {
             return this
         }
 
-        fun rxCacheConfiguration(rxCacheConfiguration: RepositoryModule.RxCacheConfiguration): Builder {
-            this.rxCacheConfiguration = rxCacheConfiguration
-            return this
-        }
+
 
         fun gsonConfiguration(gsonConfiguration: AppModule.GsonConfiguration): Builder {
             this.gsonConfiguration = gsonConfiguration

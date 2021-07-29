@@ -3,8 +3,8 @@ package com.arnold.common.mvvm.app
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.arnold.common.mvvm.data.Resource
-import io.reactivex.Flowable
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.Observable
 
 fun <T> Observable<T>.subscribeWithLiveData(liveData: MutableLiveData<Resource<T>>) {
     liveData.postValue(Resource.loading())

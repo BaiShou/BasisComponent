@@ -16,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
         buildConfigField("String", "api_host", "\"${rootProject.ext.api.api_host}\"")
     }
 
@@ -54,6 +54,9 @@ android {
 dependencies {
     implementation rootProject.ext.dependencies["kotlin_stdlib"]
     implementation rootProject.ext.dependencies["appcompat"]
+    api rootProject.ext.dependencies["gson"]
+//    api ('com.arnold.ehr:ehrArchitecture:0.1.0')
+    api project(path: ':CommonArchitecture')
     api project(path: ':CommonMvvm')
     api project(path: ':CommonView')
     if (isBuildModule.toBoolean()) {

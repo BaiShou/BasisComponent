@@ -4,9 +4,10 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.arnold.common.architecture.extension.obtainAppComponentFromContext
 import com.arnold.common.architecture.integration.cache.Cache
 import com.arnold.common.architecture.integration.cache.CacheType
-import com.arnold.common.architecture.utils.obtainAppComponentFromContext
+
 
 /**
  * 当需要继承特定的[actiivty]第三方库时，自己自定义一个[activity]，再按照[BaseActivity]的格式复制过去

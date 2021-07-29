@@ -2,6 +2,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+
+//apply plugin: 'com.novoda.bintray-release'
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
@@ -13,7 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
         consumerProguardFiles 'consumer-rules.pro'
     }
 
@@ -24,6 +27,10 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {
@@ -31,10 +38,23 @@ dependencies {
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["core_ktx"]
     implementation rootProject.ext.dependencies["constraintlayout"]
-    implementation rootProject.ext.dependencies["dagger2"]
+    compileOnly rootProject.ext.dependencies["dagger2"]
+    compileOnly project(path: ':CommonArchitecture')
+//    compileOnly 'com.arnoldx.ehr:x-ehrArchitecture:0.1.3'
     api rootProject.ext.dependencies["lifecycle-runtime"]
     api rootProject.ext.dependencies["lifecycle-extensions"]
     kapt rootProject.ext.dependencies["lifecycle-compiler"]
-    api project(path: ':CommonArchitecture')
     kapt rootProject.ext.dependencies["dagger2-compiler"]
 }
+
+
+
+//publish {
+//    userOrg = 'arnoldtian'              //bintray注册的用户名
+//    repoName = 'Ehr'                    //    仓库名
+//    groupId = 'com.arnoldx.ehr'         //compile引用时的第1部分groupId
+//    artifactId = 'x-ehrMvvm'     //compile引用时的第2部分项目名
+//    publishVersion = rootProject.ext.android.versionName    //compile引用时的第3部分版本号
+//    desc = 'Androidx,二号人事部mvvm架构开发模式'
+//    website = 'http://gitlab-test.dianmi365.com'
+//}

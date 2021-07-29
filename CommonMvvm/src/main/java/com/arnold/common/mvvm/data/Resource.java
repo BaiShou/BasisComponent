@@ -96,11 +96,9 @@ public class Resource<T> {
     /**
      * 获取 Resource 中保存的数据，如果不存在数据则返回 defaultData 所设置的默认数据，在不同状态下获取的数据具有不同的意义：
      *
-     * <pre>
-     *     <li>success 状态下，返回一个成功操作所产生的数据</li>
-     *     <li>error 状态下，返回一个默认的数据，如果存在的话</li>
-     *     <li>loading 状态下，返回一个默认的数据，如果存在的话</li>
-     * </pre>
+     * success 状态下，返回一个成功操作所产生的数据
+     * error 状态下，返回一个默认的数据，如果存在的话
+     * loading 状态下，返回一个默认的数据，如果存在的话
      *
      * @param defaultData 如果不存在数据则返回 defaultData 所设置的默认数据。
      * @return Resource 中保存的数据。
@@ -116,11 +114,11 @@ public class Resource<T> {
     /**
      * 获取 Resource 中保存的数据，在不同状态下获取的数据具有不同的意义：
      *
-     * <pre>
-     *     <li>success 状态下，返回一个成功操作所产生的数据</li>
-     *     <li>error 状态下，返回一个默认的数据，如果存在的话</li>
-     *     <li>loading 状态下，返回一个默认的数据，如果存在的话</li>
-     * </pre>
+     *
+     * success 状态下，返回一个成功操作所产生的数据
+     * error 状态下，返回一个默认的数据，如果存在的话
+     * loading 状态下，返回一个默认的数据，如果存在的话
+     *
      *
      * @return Resource 中保存的数据。
      */

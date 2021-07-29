@@ -21,7 +21,7 @@ interface IActivity {
      *
      * @param appComponent
      */
-    fun setupActivityComponent(component: AppComponent) {
+    fun setupActivityComponent(appComponent: AppComponent) {
     }
 
 

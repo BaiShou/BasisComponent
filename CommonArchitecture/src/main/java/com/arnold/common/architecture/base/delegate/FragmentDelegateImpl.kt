@@ -6,8 +6,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.arnold.common.architecture.base.IFragment
+import com.arnold.common.architecture.extension.obtainAppComponentFromContext
 import com.arnold.common.architecture.integration.EventBusManager
-import com.arnold.common.architecture.utils.obtainAppComponentFromContext
 
 /**
  * [FragmentDelegate] 默认实现类

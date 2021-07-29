@@ -20,6 +20,8 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.arnold.common.architecture.di.module.GlobalConfigModule;
+
 import java.util.Set;
 
 
@@ -28,8 +30,8 @@ import java.util.Set;
  * 用于缓存框架中所必需的组件,开发者可通过 {@link GlobalConfigModule.Builder#cacheFactory(Factory)} 为框架提供缓存策略
  * 开发者也可以用于自己日常中的使用
  *
- * @see GlobalConfigModule#provideCacheFactory$CommonArchitecture_debug(Application)
- * @see LruCache
+ * GlobalConfigModule#provideCacheFactory$CommonArchitecture_debug(Application)
+ *  LruCache
  * ================================================
  */
 public interface Cache<K, V> {

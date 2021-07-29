@@ -2,6 +2,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+
+//apply plugin: 'com.novoda.bintray-release'
+
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     buildToolsVersion rootProject.ext.android.buildToolsVersion
@@ -11,9 +14,9 @@ android {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName rootProject.ext.android.versionName
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
         consumerProguardFiles 'consumer-rules.pro'
     }
 
@@ -24,17 +27,26 @@ android {
         }
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {
     implementation rootProject.ext.dependencies["kotlin_stdlib"]
     implementation rootProject.ext.dependencies["dagger2"]
     kapt rootProject.ext.dependencies["dagger2-compiler"]
-    api rootProject.ext.dependencies["rxcache-jolyglot-gson"]
-    api(rootProject.ext.dependencies["rxcache2"]) {
-        exclude module: 'rxjava'
-        exclude module: 'dagger'
-        exclude module: 'api'
-    }
     api rootProject.ext.dependencies["mmkv"]
 }
+
+
+//publish {
+//    userOrg = 'arnoldtian'              //bintray注册的用户名
+//    repoName = 'Ehr'                    //    仓库名
+//    groupId = 'com.arnoldx.ehr'         //compile引用时的第1部分groupId
+//    artifactId = 'x-ehrRepository'     //compile引用时的第2部分项目名
+//    publishVersion = rootProject.ext.android.versionName    //compile引用时的第3部分版本号
+//    desc = 'Androidx,二号人事部，公共库数据仓库管理'
+//    website = 'http://gitlab-test.dianmi365.com'
+//}

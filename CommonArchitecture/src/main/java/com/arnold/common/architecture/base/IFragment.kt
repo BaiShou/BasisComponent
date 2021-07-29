@@ -3,9 +3,7 @@ package com.arnold.common.architecture.base
 import android.app.Activity
 import android.os.Bundle
 import android.os.Message
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.arnold.common.architecture.di.component.AppComponent
 import com.arnold.common.architecture.integration.cache.Cache
 
@@ -77,6 +75,6 @@ interface IFragment {
      *
      * @param data 当不需要参数时 `data` 可以为 `null`
      */
-    fun setData(data: Any)
+    fun setData(data: Any){}
 
 }

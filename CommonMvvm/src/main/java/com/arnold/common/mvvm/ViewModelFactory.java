@@ -12,7 +12,7 @@ import javax.inject.Provider;
 
 /**
  * @author xiaobailong24
- * @date 2017/6/16
+ * 2017/6/16
  * MVVM ViewModelFactory
  */
 public class ViewModelFactory implements ViewModelProvider.Factory {

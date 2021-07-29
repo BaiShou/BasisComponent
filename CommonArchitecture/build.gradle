@@ -10,16 +10,16 @@ android {
         minSdkVersion rootProject.ext.android.minSdkVersion
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
+        consumerProguardFiles 'consumer-rules.pro'
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            consumerProguardFiles 'proguard-rules.pro'
         }
     }
 
@@ -28,24 +28,41 @@ android {
         targetCompatibility 1.8
     }
 
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
-    implementation rootProject.ext.dependencies["dagger2"]
-    implementation rootProject.ext.dependencies["kotlin_stdlib"]
+    compileOnly rootProject.ext.dependencies["dagger2"]
+    compileOnly rootProject.ext.dependencies["kotlin_stdlib"]
     implementation rootProject.ext.dependencies["appcompat"]
     implementation rootProject.ext.dependencies["core_ktx"]
     implementation rootProject.ext.dependencies["constraintlayout"]
 
-    api project(path: ':CommonNetwork')
-    api project(path: ':CommonRepository')
+//    api project(path: ':CommonNetwork')
+//    api project(path: ':CommonRepository')
+    api 'com.arnoldx.ehr:x-ehrNetwork:0.1.7'
+    api 'com.arnoldx.ehr:x-ehrRepository:0.1.7'
     api rootProject.ext.dependencies["eventbus"]
-    api rootProject.ext.dependencies["rxjava2"]
-    api(rootProject.ext.dependencies["rxandroid2"]) {
+    api rootProject.ext.dependencies["rxjava"]
+    api(rootProject.ext.dependencies["rxandroid"]) {
         exclude module: 'rxjava'
     }
+
+    api rootProject.ext.dependencies["glide"]
+
+    api (rootProject.ext.dependencies["autodispose"]){
+        exclude module: 'rxjava'
+    }
+    api (rootProject.ext.dependencies["autodispose-android"]){
+        exclude module: 'rxjava'
+    }
+    api (rootProject.ext.dependencies["autodispose-lifecycle"]){
+        exclude module: 'rxjava'
+    }
+
+    kapt rootProject.ext.dependencies["glide-compiler"]
     kapt rootProject.ext.dependencies["dagger2-compiler"]
-}
-repositories {
-    mavenCentral()
+
 }

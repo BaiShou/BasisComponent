@@ -51,9 +51,15 @@ class EventBusManager private constructor() {
      * @param <T>
      * @return
     </T> */
-    fun <T> removeStickyEvent(eventType: Class<T>): T? {
+    fun <T> removeStickyEvent(eventType: Class<T>) {
         EventBus.getDefault().removeStickyEvent(eventType)
-        return null
+    }
+
+    /**
+     * 注销正常事件
+     */
+    fun cancelEventDelivery(event: Any) {
+        EventBus.getDefault().cancelEventDelivery(event)
     }
 
     /**

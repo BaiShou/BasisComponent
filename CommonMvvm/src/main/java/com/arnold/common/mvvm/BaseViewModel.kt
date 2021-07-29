@@ -6,13 +6,6 @@ import androidx.lifecycle.AndroidViewModel
 /**
  * 所有[AndroidViewModel]基类
  */
-open class BaseViewModel<M : IModel>(application: Application) : AndroidViewModel(application) {
-
-    var mModel: M? = null
-
-    constructor(application: Application, mModel: M) : this(application) {
-        this.mModel = mModel
-    }
-
+open class BaseViewModel<M : IModel>(application: Application, val mModel: M) : AndroidViewModel(application) {
 
 }

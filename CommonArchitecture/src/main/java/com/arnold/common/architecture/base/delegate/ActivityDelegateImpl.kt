@@ -3,8 +3,8 @@ package com.arnold.common.architecture.base.delegate
 import android.app.Activity
 import android.os.Bundle
 import com.arnold.common.architecture.base.IActivity
+import com.arnold.common.architecture.extension.obtainAppComponentFromContext
 import com.arnold.common.architecture.integration.EventBusManager
-import com.arnold.common.architecture.utils.obtainAppComponentFromContext
 
 /**
  * [ActivityDelegate] 默认实现类
